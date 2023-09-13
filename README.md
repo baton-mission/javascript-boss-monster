@@ -14,7 +14,7 @@
 
 - 미션 구현을 완료한 후 GitHub을 통해 Pull Request를 올립니다.
 - Github에 Pull Request를 제출한 후 [바톤](http://baton-review.com)에 접속하여 글을 게시합니다.
-- 자세한 제출 방법은 [바톤 미션 제출 문서](https://github.com/2023baton/baton-docs) 를 참고하시면 됩니다.
+- 자세한 제출 방법은 [바톤 미션 제출 문서](https://github.com/baton-mission/docs/blob/main/mission-guide.md) 를 참고하시면 됩니다.
   - **Pull Request만 보내고, 바톤 사이트에 게시하지 않는 경우에는 코드 리뷰를 도와드릴 수 없으므로 주의해주시면 감사하겠습니다.**
 
 ## ✔️ 미션 제출 전 체크리스트
@@ -170,7 +170,7 @@ dori의 HP가 0이 되었습니다.
 
   - 리뷰이분들도 미리 구현할 것에 대해 생각해볼 수 있기 때문에 기능 목록을 작성하지 않는 것보다 꼼꼼하고 단계적으로 코드를 작성하실 수 있을 것 같습니다.
 
-- 미션 진행 및 제출 방법은 [바톤 미션 제출 문서](https://github.com/2023baton/baton-docs) 를 참고한다.
+- 미션 진행 및 제출 방법은 [바톤 미션 제출 문서](https://github.com/baton-mission/docs/blob/main/mission-guide.md) 를 참고한다.
 
 <br>
 
