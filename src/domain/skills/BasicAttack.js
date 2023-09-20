@@ -16,7 +16,7 @@ class BasicAttack extends AttackSkill {
   }
 
   _bonusEffect() {
-    if ('mp' in this._caster) {
+    if ('mp' in this._caster.status) {
       this._caster.increaseMp(this.#mpRecovery);
     }
   }

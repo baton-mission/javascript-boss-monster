@@ -9,7 +9,7 @@ class AttackSkill extends Skill {
   }
 
   _effect(enemy) {
-    enemy.takeDamage(this._damage);
+    enemy.decreaseHp(this._damage);
   }
 }
 
