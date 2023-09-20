@@ -1,3 +1,3 @@
-export const isOutOfRange = (target, min, max) => target < min || target > max;
+export const isOutOfRange = (value, min, max) => value < min || value > max;
 
-export const isDecimal = (target) => !Number.isInteger(target);
+export const isDecimal = (value) => !Number.isInteger(value);
