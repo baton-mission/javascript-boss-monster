@@ -8,7 +8,7 @@ describe('유닛 테스트', () => {
 
   beforeEach(() => {
     unit = new Unit({ name: '유닛', hp: 100, mp: 100 });
-    skill = new Skill(unit, { skillName: '스킬', requireMp: 0 });
+    skill = new Skill(unit, { skillName: '스킬', requireMp: 30 });
   });
 
   it('유닛은 체력을 보유한다.', () => {
@@ -21,14 +21,6 @@ describe('유닛 테스트', () => {
     expect(unit.skills.size).toBe(1);
   });
 
-  it('동일한 스킬을 배울 시 에러를 발생시킨다.', () => {
-    unit.learnSkill(skill.skillName, skill);
-
-    expect(() => {
-      unit.learnSkill(skill.skillName, skill);
-    }).toThrow(ERROR_MESSAGE.EXISTING_SKILL);
-  });
-
   it('유닛은 스킬을 사용할 수 있다.', () => {
     const enemy = new Unit({ name: '몬스터', hp: 100 });
     unit.learnSkill('스킬', skill);
@@ -38,6 +30,31 @@ describe('유닛 테스트', () => {
     unit.useSkill('스킬', enemy);
 
     expect(skillSpy).toHaveBeenCalled();
+  });
+
+  it('스킬에 필요한 마나가 부족할 시 에러를 발생시킨다.', () => {
+    unit.learnSkill(skill.skillName, skill);
+
+    expect(() => {
+      unit.useSkill(skill.skillName);
+      unit.useSkill(skill.skillName);
+      unit.useSkill(skill.skillName);
+      unit.useSkill(skill.skillName);
+    }).toThrow(ERROR_MESSAGE.INSUFFICIENT_MP);
+  });
+
+  it('배우지 않은 스킬을 사용할 시 에러를 발생시킨다.', () => {
+    expect(() => {
+      unit.useSkill(skill.skillName);
+    }).toThrow(ERROR_MESSAGE.MISSING_SKILL);
+  });
+
+  it('동일한 스킬을 배울 시 에러를 발생시킨다.', () => {
+    unit.learnSkill(skill.skillName, skill);
+
+    expect(() => {
+      unit.learnSkill(skill.skillName, skill);
+    }).toThrow(ERROR_MESSAGE.EXISTING_SKILL);
   });
 
   it('유닛은 hp와 mp를 소모할 수 있다.', () => {

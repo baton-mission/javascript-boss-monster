@@ -27,13 +27,9 @@ class Skill {
     this._bonusEffect(enemy);
   }
 
-  _effect() {
-    return null;
-  }
+  _effect() {}
 
-  _bonusEffect() {
-    return null;
-  }
+  _bonusEffect() {}
 }
 
 export default Skill;
