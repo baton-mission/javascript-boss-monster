@@ -1,3 +1,5 @@
+import ERROR_MESSAGE from '../../constants/error';
+
 class Unit {
   _status = {
     name: '',
@@ -8,10 +10,10 @@ class Unit {
   constructor({ name, hp, mp }) {
     this.name = name;
     if (hp) {
-      this.hp = hp;
+      this.initialHp = hp;
     }
     if (mp) {
-      this.mp = mp;
+      this.initialMp = mp;
     }
     this.learnBasicSkills();
   }
@@ -20,12 +22,12 @@ class Unit {
     this._status.name = name;
   }
 
-  set hp(hp) {
+  set initialHp(hp) {
     this._status.hp = hp;
     this._status.maxHp = hp;
   }
 
-  set mp(mp) {
+  set initialMp(mp) {
     this._status.mp = mp;
     this._status.maxMp = mp;
   }
@@ -59,6 +61,9 @@ class Unit {
   }
 
   learnSkill(skillName, skill) {
+    if (this._skills.get(skillName)) {
+      throw new Error(ERROR_MESSAGE.EXISTING_SKILL);
+    }
     this._skills.set(skillName, skill);
   }
 
