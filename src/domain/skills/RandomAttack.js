@@ -10,7 +10,6 @@ class RandomAttack extends AttackSkill {
     return new RandomAttack(user, {
       skillName: RandomAttack.SKILL_NAME,
       damage: RandomAttack.DAMAGE,
-      requireMp: RandomAttack.REQUIRED_MP,
     });
   }
 

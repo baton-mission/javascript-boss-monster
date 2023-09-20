@@ -8,7 +8,7 @@ class BasicAttack extends AttackSkill {
   #mpRecovery = 10;
 
   static of(user) {
-    return new BasicAttack(user, { skillName: BasicAttack.SKILL_NAME, requireMp: 0, damage: 10 });
+    return new BasicAttack(user, { skillName: BasicAttack.SKILL_NAME, damage: 10 });
   }
 
   _bonusEffect() {
