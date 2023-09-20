@@ -8,6 +8,7 @@ class Unit {
   _skills = new Map();
 
   constructor({ name, hp, mp }) {
+    this.validate();
     this.name = name;
     if (hp) {
       this.initialHp = hp;
@@ -39,6 +40,8 @@ class Unit {
   get skills() {
     return this._skills;
   }
+
+  validate() {}
 
   increaseStatus(field, limit, value) {
     const updatedValue = this._status[field] + value;
@@ -81,9 +84,7 @@ class Unit {
     this._skills.set(skillName, skill);
   }
 
-  learnBasicSkills() {
-    return null;
-  }
+  learnBasicSkills() {}
 
   useSkill(skillName, enemy) {
     const skill = this._skills.get(skillName);

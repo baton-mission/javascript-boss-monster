@@ -61,3 +61,29 @@ describe('유닛 테스트', () => {
     expect(unit.status.mp).toBe(0);
   });
 });
+
+describe('유닛 생성 예외 테스트', () => {
+  it.each([{ hp: '짱쎔' }, { hp: true }, { hp: [100] }])('숫자가 아닌 hp를 입력하면 에러가 발생한다.', (name) => {
+    expect(({ hp }) => {
+      new Unit({ name, hp, mp: 100 });
+    }).toBeThrow(ERROR_MESSAGE.IS_NOT_NUMBER('HP'));
+  });
+
+  it.each([{ mp: '짱쎔' }, { mp: true }, { mp: [100] }])('숫자가 아닌 mp를 입력하면 에러가 발생한다.', (name) => {
+    expect(({ mp }) => {
+      new Unit({ name, hp: 100, mp });
+    }).toBeThrow(ERROR_MESSAGE.IS_NOT_NUMBER('MP'));
+  });
+
+  it.each([{ hp: '짱쎔' }, { hp: true }, { hp: [100] }])('정수가 아닌 hp를 입력하면 에러가 발생한다.', (name) => {
+    expect(({ hp }) => {
+      new Unit({ name, hp, mp: 100 });
+    }).toBeThrow(ERROR_MESSAGE.IS_DECIMAL('HP'));
+  });
+
+  it.each([{ mp: '짱쎔' }, { mp: true }, { mp: [100] }])('정수가 아닌 mp를 입력하면 에러가 발생한다.', (name) => {
+    expect(({ mp }) => {
+      new Unit({ name, hp: 100, mp });
+    }).toBeThrow(ERROR_MESSAGE.IS_DECIMAL('MP'));
+  });
+});
