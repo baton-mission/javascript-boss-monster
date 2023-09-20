@@ -7,10 +7,6 @@ class BasicAttack extends AttackSkill {
 
   #mpRecovery = 10;
 
-  constructor(user, { skillName, damage, requireMp }) {
-    super(user, { skillName, damage, requireMp });
-  }
-
   static of(user) {
     return new BasicAttack(user, { skillName: BasicAttack.SKILL_NAME, requireMp: 0, damage: 10 });
   }

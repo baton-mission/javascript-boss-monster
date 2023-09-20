@@ -20,6 +20,9 @@ class Skill {
   }
 
   use(enemy) {
+    if (this.#requireMp) {
+      this._caster.decreaseMp(this.#requireMp);
+    }
     this._effect(enemy);
     this._bonusEffect(enemy);
   }

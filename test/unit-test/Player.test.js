@@ -1,6 +1,7 @@
 import Player from '../../src/domain/Player';
 import Unit from '../../src/domain/core/Unit';
 import BasicAttack from '../../src/domain/skills/BasicAttack';
+import MagicAttack from '../../src/domain/skills/MagicAttack';
 
 describe('플레이어 테스트', () => {
   let player;
@@ -32,9 +33,9 @@ describe('플레이어 테스트', () => {
   });
 
   it('플레이어는 유닛을 마법 공격 할 시 유닛의 hp가 30 소모하고 플레이어의 mp가 30 소모한다.', () => {
-    player.useSkill(BasicAttack.SKILL_NAME, enemy);
+    player.useSkill(MagicAttack.SKILL_NAME, enemy);
 
-    expect(enemy.status.hp).toBe(90);
-    expect(player.status.mp).toBe(60);
+    expect(enemy.status.hp).toBe(70);
+    expect(player.status.mp).toBe(50);
   });
 });
