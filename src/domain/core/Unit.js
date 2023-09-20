@@ -114,10 +114,17 @@ class Unit {
 
   useSkill(skillName, enemy) {
     const skill = this._skills.get(skillName);
-    if (!skill) {
-      throw new Error('보유하지 않은 스킬입니다!');
-    }
+    this.validateUseSkill(skill);
     skill.use(enemy);
+  }
+
+  validateUseSkill(skill) {
+    if (!skill) {
+      throw new Error(ERROR_MESSAGE.MISSING_SKILL);
+    }
+    if (this._status.mp < skill.requireMp) {
+      throw new Error(ERROR_MESSAGE.INSUFFICIENT_MP);
+    }
   }
 }
 
