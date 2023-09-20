@@ -7,8 +7,8 @@ export class MagicAttack extends Attack {
 
   static REQUIRED_MP = 30;
 
-  static of(user) {
-    return new MagicAttack(user, {
+  static of(caster) {
+    return new MagicAttack(caster, {
       skillName: MagicAttack.SKILL_NAME,
       damage: MagicAttack.DAMAGE,
       requireMp: MagicAttack.REQUIRED_MP,

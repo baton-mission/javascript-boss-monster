@@ -6,8 +6,8 @@ export class RandomAttack extends Attack {
 
   static DAMAGE = 0;
 
-  static of(user) {
-    return new RandomAttack(user, {
+  static of(caster) {
+    return new RandomAttack(caster, {
       skillName: RandomAttack.SKILL_NAME,
       damage: RandomAttack.DAMAGE,
     });
