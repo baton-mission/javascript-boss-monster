@@ -42,7 +42,7 @@ describe('플레이어 테스트', () => {
 
 describe('플레이어 생성 예외 테스트', () => {
   it.each([{ name: '' }, { name: '스티븐제라드' }, { name: '황금독수리세상을놀라게하다' }])(
-    '유효한 글자수가 아닌 플레이어 이름을 입력하면 에러가 발생한다.',
+    '유효한 글자수가 아닌 $name을 입력하면 에러가 발생한다.',
     ({ name }) => {
       const { MIN_NAME_LENGTH: min, MAX_NAME_LENGTH: max } = Player.CREATION_CONDITION;
       expect(() => {

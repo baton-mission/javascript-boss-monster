@@ -32,7 +32,7 @@ describe('보스몬스터 테스트', () => {
 });
 
 describe('몬스터 생성 예외 테스트', () => {
-  it.each([{ hp: 99 }, { hp: 201 }])('hp가 유효한 범위가 아닐 경우 에러가 발생한다.', ({ hp }) => {
+  it.each([{ hp: 99 }, { hp: 201 }])('hp가 유효한 범위가 아닌 $hp인 경우 에러가 발생한다.', ({ hp }) => {
     const { MIN_INITIAL_HP: min, MAX_INITIAL_HP: max } = Monster.CREATION_CONDITION;
 
     expect(() => {
