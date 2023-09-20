@@ -111,4 +111,19 @@ describe('전장 전투 테스트', () => {
     expect(battleField.enemy.status.hp).toBe(100);
     expect(battleField.turn).toBe(1);
   });
+
+  it('전투 결과에 따라 보스 몬스터의 외형이 바뀐다.', () => {
+    const player = new Player({ name: '용사', hp: 20, mp: 180 });
+    const battleField = new BattleFiled(player);
+    const monster = new Monster({ name: '보스 몬스터', hp: 100 });
+    battleField.setEnemy(monster);
+
+    expect(battleField.enemy.status.appearance).toBe(Monster.CONDITIONS.NORMAL.APPEARANCE);
+
+    battleField.processTurn(BasicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
+    expect(battleField.enemy.status.appearance).toBe(Monster.CONDITIONS.TAKEN_DAMAGE.APPEARANCE);
+
+    battleField.processTurn(BasicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
+    expect(battleField.enemy.status.appearance).toBe(Monster.CONDITIONS.RAID_FAILED.APPEARANCE);
+  });
 });
