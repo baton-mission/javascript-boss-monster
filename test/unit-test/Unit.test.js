@@ -60,6 +60,11 @@ describe('유닛 테스트', () => {
     expect(unit.status.hp).toBe(0);
     expect(unit.status.mp).toBe(0);
   });
+
+  it.each([{ damage: 100 }, { damage: 110 }])('유닛의 hp가 0 이하로 떨어지면 dead 처리 된다.', ({ damage }) => {
+    unit.decreaseHp(damage);
+    expect(unit.status.isDead).toBeTruthy();
+  });
 });
 
 describe('유닛 생성 예외 테스트', () => {

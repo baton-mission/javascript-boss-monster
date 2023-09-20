@@ -19,6 +19,34 @@ describe('보스몬스터 테스트', () => {
     expect(monster.status.hp).toBe(100);
   });
 
+  it(`보스 몬스터의 초기 상태는 ${Monster.CONDITIONS.NORMAL.CODE}이다.`, () => {
+    expect(monster.status.condition).toBe(Monster.CONDITIONS.NORMAL.CODE);
+    expect(monster.status.appearance).toBe(Monster.CONDITIONS.NORMAL.APPEARANCE);
+  });
+
+  it.each([{ code: Monster.CONDITIONS.TAKEN_DAMAGE.CODE }, { code: Monster.CONDITIONS.RAID_FAILED.CODE }])(
+    '보스 몬스터의 상태를 변경하면 외형도 변화한다.',
+    ({ code }) => {
+      monster.condition = code;
+      expect(monster.status.condition).toBe(Monster.CONDITIONS[code].CODE);
+      expect(monster.status.appearance).toBe(Monster.CONDITIONS[code].APPEARANCE);
+    }
+  );
+
+  it('보스 몬스터는 피격시 외형이 피격 상태로 변화한다.', () => {
+    monster.decreaseHp(10);
+    expect(monster.status.condition).toBe(Monster.CONDITIONS.TAKEN_DAMAGE.CODE);
+    expect(monster.status.appearance).toBe(Monster.CONDITIONS.TAKEN_DAMAGE.APPEARANCE);
+  });
+
+  it('존재하지 않는 상태코드를 입력시 에러가 발생하며 변화하지 않는다.', () => {
+    expect(() => {
+      monster.condition = '가짜_코드';
+    }).toThrow(ERROR_MESSAGE.UNKNOWN_CONDITION_CODE);
+    expect(monster.status.condition).toBe(Monster.CONDITIONS.NORMAL.CODE);
+    expect(monster.status.appearance).toBe(Monster.CONDITIONS.NORMAL.APPEARANCE);
+  });
+
   it('보스 몬스터는 기본 스킬로 랜덤 데미지 공격을 가진다.', () => {
     expect(monster.skills.size).toBe(1);
     expect(monster.skills.get(RandomAttack.SKILL_NAME)).toBeDefined();
