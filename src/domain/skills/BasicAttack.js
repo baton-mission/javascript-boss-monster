@@ -1,4 +1,4 @@
-import AttackSkill from '../core/skill/AttackSkill';
+import AttackSkill from '../core/skills/AttackSkill';
 
 class BasicAttack extends AttackSkill {
   static SKILL_NAME = '물리 공격';

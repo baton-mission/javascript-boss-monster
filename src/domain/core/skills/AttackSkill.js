@@ -1,4 +1,4 @@
-import Skill from '../Skill';
+import Skill from './Skill';
 
 class AttackSkill extends Skill {
   _damage;
