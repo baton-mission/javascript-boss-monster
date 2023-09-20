@@ -4,6 +4,7 @@ import * as validator from '../../utils/validator';
 class Unit {
   _status = {
     name: '',
+    isDead: false,
   };
 
   _skills = new Map();
@@ -85,6 +86,9 @@ class Unit {
 
   decreaseHp(damage) {
     this.decreaseStatus('hp', damage);
+    if (!this._status.hp) {
+      this.dead();
+    }
   }
 
   increaseMp(mp) {
@@ -93,6 +97,10 @@ class Unit {
 
   decreaseMp(mp) {
     this.decreaseStatus('mp', mp);
+  }
+
+  dead() {
+    this._status.isDead = true;
   }
 
   learnSkill(skillName, skill) {

@@ -11,9 +11,60 @@ export class Monster extends Unit {
     TOTAL_HP_MP: 200,
   });
 
+  static CONDITIONS = {
+    NORMAL: {
+      CODE: 'NORMAL',
+      APPEARANCE: `
+         ^-^
+       / 0 0 \\
+      (   "   )
+       \\  -  /
+        - ^ -
+      `,
+    },
+    TAKEN_DAMAGE: {
+      CODE: 'TAKEN_DAMAGE',
+      APPEARANCE: `
+         ^-^
+       / x x \\
+      (   "   )
+       \\  -  /
+        - ^ -
+      `,
+    },
+    RAID_FAILED: {
+      CODE: 'RAID_FAILED',
+      APPEARANCE: `
+         ^-^
+       / ^ ^ \\
+      (   "   )
+       \\  3  /
+        - ^ -
+      `,
+    },
+  };
+
   constructor({ name, hp }) {
     super({ name, hp });
     this.validateHpRange(hp);
+    this.condition = Monster.CONDITIONS.NORMAL.CODE;
+  }
+
+  set condition(code) {
+    const updatedCondition = Monster.CONDITIONS[code];
+    if (!updatedCondition) {
+      throw new Error(ERROR_MESSAGE.UNKNOWN_CONDITION_CODE);
+    }
+    this._status.condition = updatedCondition.CODE;
+    this._status.appearance = updatedCondition.APPEARANCE;
+  }
+
+  decreaseHp(damage) {
+    this.decreaseStatus('hp', damage);
+    if (!this._status.hp) {
+      this.dead();
+    }
+    this.condition = Monster.CONDITIONS.TAKEN_DAMAGE.CODE;
   }
 
   validateHpRange(hp) {

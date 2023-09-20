@@ -7,6 +7,8 @@ const ERROR_MESSAGE = Object.freeze({
   IS_BELOW_ZERO: (target) => `${target}에 0을 초과하는 숫자를 입력해주세요!`,
 
   EXISTING_SKILL: '이미 배운 스킬입니다!',
+
+  UNKNOWN_CONDITION_CODE: '존재하지 않는 상태 코드입니다!',
 });
 
 export default ERROR_MESSAGE;
