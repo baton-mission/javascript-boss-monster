@@ -8,7 +8,7 @@ class Skill {
   constructor(caster, { skillName, requireMp }) {
     this._caster = caster;
     this.#skillName = skillName;
-    this.#requireMp = requireMp;
+    this.#requireMp = requireMp || 0;
   }
 
   get skillName() {
