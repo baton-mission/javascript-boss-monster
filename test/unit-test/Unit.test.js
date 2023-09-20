@@ -63,27 +63,39 @@ describe('유닛 테스트', () => {
 });
 
 describe('유닛 생성 예외 테스트', () => {
-  it.each([{ hp: '짱쎔' }, { hp: true }, { hp: [100] }])('숫자가 아닌 hp를 입력하면 에러가 발생한다.', (name) => {
-    expect(({ hp }) => {
-      new Unit({ name, hp, mp: 100 });
-    }).toBeThrow(ERROR_MESSAGE.IS_NOT_NUMBER('HP'));
+  it.each([{ hp: '짱쎔' }, { hp: true }, { hp: [100] }])('숫자가 아닌 hp를 입력하면 에러가 발생한다.', ({ hp }) => {
+    expect(() => {
+      new Unit({ name: '유닛', hp, mp: 100 });
+    }).toThrow(ERROR_MESSAGE.IS_NOT_NUMBER('HP'));
   });
 
-  it.each([{ mp: '짱쎔' }, { mp: true }, { mp: [100] }])('숫자가 아닌 mp를 입력하면 에러가 발생한다.', (name) => {
-    expect(({ mp }) => {
-      new Unit({ name, hp: 100, mp });
-    }).toBeThrow(ERROR_MESSAGE.IS_NOT_NUMBER('MP'));
+  it.each([{ mp: '짱쎔' }, { mp: true }, { mp: [100] }])('숫자가 아닌 mp를 입력하면 에러가 발생한다.', ({ mp }) => {
+    expect(() => {
+      new Unit({ name: '유닛', hp: 100, mp });
+    }).toThrow(ERROR_MESSAGE.IS_NOT_NUMBER('MP'));
   });
 
-  it.each([{ hp: '짱쎔' }, { hp: true }, { hp: [100] }])('정수가 아닌 hp를 입력하면 에러가 발생한다.', (name) => {
-    expect(({ hp }) => {
-      new Unit({ name, hp, mp: 100 });
-    }).toBeThrow(ERROR_MESSAGE.IS_DECIMAL('HP'));
+  it.each([{ hp: 0.1 }, { hp: 150.5 }])('정수가 아닌 hp를 입력하면 에러가 발생한다.', ({ hp }) => {
+    expect(() => {
+      new Unit({ name: '유닛', hp, mp: 100 });
+    }).toThrow(ERROR_MESSAGE.IS_DECIMAL('HP'));
   });
 
-  it.each([{ mp: '짱쎔' }, { mp: true }, { mp: [100] }])('정수가 아닌 mp를 입력하면 에러가 발생한다.', (name) => {
-    expect(({ mp }) => {
-      new Unit({ name, hp: 100, mp });
-    }).toBeThrow(ERROR_MESSAGE.IS_DECIMAL('MP'));
+  it.each([{ mp: 0.1 }, { mp: 150.5 }])('정수가 아닌 mp를 입력하면 에러가 발생한다.', ({ mp }) => {
+    expect(() => {
+      new Unit({ name: '유닛', hp: 100, mp });
+    }).toThrow(ERROR_MESSAGE.IS_DECIMAL('MP'));
+  });
+
+  it.each([{ hp: 0 }, { hp: -10 }])('0 이하의 hp를 입력하면 에러가 발생한다.', ({ hp }) => {
+    expect(() => {
+      new Unit({ name: '유닛', hp, mp: 100 });
+    }).toThrow(ERROR_MESSAGE.IS_BELOW_ZERO('HP'));
+  });
+
+  it.each([{ mp: 0 }, { mp: -10 }])('0 이하의 mp를 입력하면 에러가 발생한다.', ({ mp }) => {
+    expect(() => {
+      new Unit({ name: '유닛', hp: 100, mp });
+    }).toThrow(ERROR_MESSAGE.IS_BELOW_ZERO('MP'));
   });
 });

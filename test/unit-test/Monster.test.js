@@ -1,6 +1,6 @@
 import { Player, Monster } from '../../src/domain/units';
 import { RandomAttack } from '../../src/domain/skills';
-import { Random } from '../../src/random';
+import { Random } from '../../src/utils/random';
 
 jest.spyOn(Random, 'calculateBossDMG').mockReturnValue(13);
 
