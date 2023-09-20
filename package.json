@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "cypress run --browser chrome",
-    "test-jest": "jest --w --no-coverage"
+    "test-jest": "jest --watch --no-coverage"
   },
   "type": "module",
   "homepage": "https://github.com/2023baton/javascript-boss-monster#readme",
