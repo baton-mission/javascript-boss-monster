@@ -59,11 +59,7 @@ export class Monster extends Unit {
     this._status.appearance = updatedCondition.APPEARANCE;
   }
 
-  decreaseHp(damage) {
-    this.decreaseStatus('hp', damage);
-    if (!this._status.hp) {
-      this.dead();
-    }
+  decreaseHpEffect() {
     this.condition = Monster.CONDITIONS.TAKEN_DAMAGE.CODE;
   }
 

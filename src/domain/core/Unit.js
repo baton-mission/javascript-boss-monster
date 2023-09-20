@@ -86,10 +86,13 @@ class Unit {
 
   decreaseHp(damage) {
     this.decreaseStatus('hp', damage);
+    this.decreaseHpEffect();
     if (!this._status.hp) {
       this.dead();
     }
   }
+
+  decreaseHpEffect() {}
 
   increaseMp(mp) {
     this.increaseStatus('mp', 'maxMp', mp);
