@@ -73,4 +73,8 @@ export class Monster extends Unit {
   learnBasicSkills() {
     this.learnSkill(RandomAttack.SKILL_NAME, RandomAttack.of(this));
   }
+
+  setWinner() {
+    this.condition = Monster.CONDITIONS.RAID_FAILED.CODE;
+  }
 }

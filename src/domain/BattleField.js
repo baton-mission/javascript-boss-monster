@@ -60,6 +60,7 @@ export default class BattleFiled {
   checkWinner() {
     if (this.#player.status.isDead) {
       this.#winner = this.#enemy;
+      this.#enemy.setWinner();
       return;
     }
     if (this.#enemy.status.isDead) {
