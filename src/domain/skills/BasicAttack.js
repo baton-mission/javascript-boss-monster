@@ -1,6 +1,6 @@
-import AttackSkill from '../core/skills/AttackSkill';
+import Attack from '../core/skills/Attack';
 
-export class BasicAttack extends AttackSkill {
+export class BasicAttack extends Attack {
   static SKILL_NAME = '물리 공격';
 
   static DAMAGE = 10;

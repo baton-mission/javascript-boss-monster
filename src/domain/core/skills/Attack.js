@@ -1,6 +1,6 @@
 import Skill from './Skill';
 
-class AttackSkill extends Skill {
+class Attack extends Skill {
   _damage;
 
   constructor(user, { skillName, damage, requireMp }) {
@@ -13,4 +13,4 @@ class AttackSkill extends Skill {
   }
 }
 
-export default AttackSkill;
+export default Attack;

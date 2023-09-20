@@ -1,7 +1,7 @@
 import { Random } from '../../random';
-import AttackSkill from '../core/skills/AttackSkill';
+import Attack from '../core/skills/Attack';
 
-export class RandomAttack extends AttackSkill {
+export class RandomAttack extends Attack {
   static SKILL_NAME = '랜덤 공격';
 
   static DAMAGE = 0;
