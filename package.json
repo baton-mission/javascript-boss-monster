@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "보스 몬스터 잡기 게임 미션을 위한 저장소",
   "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/2023baton/javascript-boss-monster.git"
@@ -16,13 +13,22 @@
     "url": "https://github.com/2023baton/javascript-boss-monster/issues"
   },
   "scripts": {
-    "test": "cypress run --browser chrome"
+    "test": "cypress run --browser chrome",
+    "test-jest": "jest --w --no-coverage"
   },
+  "type": "module",
   "homepage": "https://github.com/2023baton/javascript-boss-monster#readme",
   "engines": {
     "node": ">=18.0.0"
   },
   "devDependencies": {
-    "cypress": "^13.1.0"
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.22.20",
+    "@types/jest": "^29.5.5",
+    "cypress": "^13.1.0",
+    "eslint": "^8.49.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.28.1",
+    "jest": "^29.7.0"
   }
 }
