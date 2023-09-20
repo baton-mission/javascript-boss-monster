@@ -1,4 +1,4 @@
-import { Random } from '../../random';
+import { Random } from '../../utils/random';
 import Attack from '../core/skills/Attack';
 
 export class RandomAttack extends Attack {
