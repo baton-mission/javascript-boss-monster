@@ -1,7 +1,6 @@
-import Player from '../../src/domain/Player';
 import Unit from '../../src/domain/core/Unit';
-import BasicAttack from '../../src/domain/skills/BasicAttack';
-import MagicAttack from '../../src/domain/skills/MagicAttack';
+import { Player } from '../../src/domain/units';
+import { MagicAttack, BasicAttack } from '../../src/domain/skills';
 
 describe('플레이어 테스트', () => {
   let player;

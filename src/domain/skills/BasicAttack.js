@@ -1,6 +1,6 @@
 import AttackSkill from '../core/skills/AttackSkill';
 
-class BasicAttack extends AttackSkill {
+export class BasicAttack extends AttackSkill {
   static SKILL_NAME = '물리 공격';
 
   static DAMAGE = 10;
@@ -17,5 +17,3 @@ class BasicAttack extends AttackSkill {
     }
   }
 }
-
-export default BasicAttack;

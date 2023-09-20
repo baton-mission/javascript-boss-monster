@@ -1,6 +1,6 @@
 import AttackSkill from '../core/skills/AttackSkill';
 
-class MagicAttack extends AttackSkill {
+export class MagicAttack extends AttackSkill {
   static SKILL_NAME = '마법 공격';
 
   static DAMAGE = 30;
@@ -15,5 +15,3 @@ class MagicAttack extends AttackSkill {
     });
   }
 }
-
-export default MagicAttack;

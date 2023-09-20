@@ -1,7 +1,7 @@
 import { Random } from '../../random';
 import AttackSkill from '../core/skills/AttackSkill';
 
-class RandomAttack extends AttackSkill {
+export class RandomAttack extends AttackSkill {
   static SKILL_NAME = '랜덤 공격';
 
   static DAMAGE = 0;
@@ -18,5 +18,3 @@ class RandomAttack extends AttackSkill {
     enemy.decreaseHp(damage);
   }
 }
-
-export default RandomAttack;
