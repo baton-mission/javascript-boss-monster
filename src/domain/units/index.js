@@ -1,2 +1,3 @@
 export * from './Player';
-export * from './Monster';
+
+export * from './monsters/BossMonster';

@@ -1,5 +1,5 @@
-import ERROR_MESSAGE from '../../constants/error';
-import * as validator from '../../utils/validator';
+import ERROR_MESSAGE from '../../../constants/error';
+import * as validator from '../../../utils/validator';
 
 class Unit {
   _status = {

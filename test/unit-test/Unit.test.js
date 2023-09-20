@@ -1,6 +1,6 @@
 import ERROR_MESSAGE from '../../src/constants/error';
 import Skill from '../../src/domain/core/skills/Skill';
-import Unit from '../../src/domain/core/Unit';
+import Unit from '../../src/domain/core/units/Unit';
 
 describe('유닛 테스트', () => {
   let unit;

@@ -1,6 +1,7 @@
 import BattleFiled from '../../src/domain/BattleField';
+import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
+import { Player } from '../../src/domain/units';
 import { BasicAttack, MagicAttack, RandomAttack } from '../../src/domain/skills';
-import { Monster, Player } from '../../src/domain/units';
 import { Random } from '../../src/utils/random';
 
 jest.spyOn(Random, 'calculateBossDMG').mockReturnValue(10);
@@ -19,7 +20,7 @@ describe('전장 테스트', () => {
   });
 
   it('전장은 상대를 입력받는다', () => {
-    const monster = new Monster({ name: '보스 몬스터', hp: 100 });
+    const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
     battleField.setEnemy(monster);
 
     expect(battleField.enemy).toEqual(monster);
@@ -42,7 +43,7 @@ describe('전장 전투 테스트', () => {
   it('전장은 턴을 진행하면서 스킬을 주고받는다.', () => {
     const player = new Player({ name: '용사', hp: 120, mp: 80 });
     const battleField = new BattleFiled(player);
-    const monster = new Monster({ name: '보스 몬스터', hp: 100 });
+    const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
 
     battleField.setEnemy(monster);
 
@@ -64,7 +65,7 @@ describe('전장 전투 테스트', () => {
   it('전장은 턴을 진행할때마다 사망한 유닛을 확인하고 우승자를 설정한다.', () => {
     const player = new Player({ name: '용사', hp: 120, mp: 80 });
     const battleField = new BattleFiled(player);
-    const monster = new Monster({ name: '보스 몬스터', hp: 100 });
+    const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
     battleField.setEnemy(monster);
     monster.decreaseHp(60);
 
@@ -78,7 +79,7 @@ describe('전장 전투 테스트', () => {
   it('플레이어가 선제공격이기에 공격 후 적이 죽으면 적의 스킬은 시전되지 않는다.', () => {
     const player = new Player({ name: '용사', hp: 120, mp: 80 });
     const battleField = new BattleFiled(player);
-    const monster = new Monster({ name: '보스 몬스터', hp: 100 });
+    const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
     battleField.setEnemy(monster);
     monster.decreaseHp(70);
 
@@ -90,7 +91,7 @@ describe('전장 전투 테스트', () => {
   it('스킬 시전에 실해할 시 턴이 진행되지 않는다.', () => {
     const player = new Player({ name: '용사', hp: 180, mp: 20 });
     const battleField = new BattleFiled(player);
-    const monster = new Monster({ name: '보스 몬스터', hp: 100 });
+    const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
     battleField.setEnemy(monster);
 
     expect(() => {
@@ -115,15 +116,17 @@ describe('전장 전투 테스트', () => {
   it('전투 결과에 따라 보스 몬스터의 외형이 바뀐다.', () => {
     const player = new Player({ name: '용사', hp: 20, mp: 180 });
     const battleField = new BattleFiled(player);
-    const monster = new Monster({ name: '보스 몬스터', hp: 100 });
+    const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
     battleField.setEnemy(monster);
 
-    expect(battleField.enemy.status.appearance).toBe(Monster.CONDITIONS.NORMAL.APPEARANCE);
+    expect(battleField.enemy.status.appearance).toBe(BossMonster.CONDITIONS.NORMAL.APPEARANCE);
 
     battleField.processTurn(BasicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
-    expect(battleField.enemy.status.appearance).toBe(Monster.CONDITIONS.TAKEN_DAMAGE.APPEARANCE);
+    expect(battleField.enemy.status.appearance).toBe(
+      BossMonster.CONDITIONS.TAKEN_DAMAGE.APPEARANCE
+    );
 
     battleField.processTurn(BasicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
-    expect(battleField.enemy.status.appearance).toBe(Monster.CONDITIONS.RAID_FAILED.APPEARANCE);
+    expect(battleField.enemy.status.appearance).toBe(BossMonster.CONDITIONS.RAID_FAILED.APPEARANCE);
   });
 });

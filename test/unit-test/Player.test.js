@@ -1,7 +1,7 @@
-import Unit from '../../src/domain/core/Unit';
 import { Player } from '../../src/domain/units';
 import { MagicAttack, BasicAttack } from '../../src/domain/skills';
 import ERROR_MESSAGE from '../../src/constants/error';
+import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
 
 describe('플레이어 테스트', () => {
   let player;
@@ -9,7 +9,7 @@ describe('플레이어 테스트', () => {
 
   beforeEach(() => {
     player = new Player({ name: '용사', hp: 120, mp: 80 });
-    enemy = new Unit({ name: '몬스터', hp: 100 });
+    enemy = new BossMonster({ name: '몬스터', hp: 100 });
   });
 
   it('플레이어는 이름, hp, mp를 보유한다.', () => {
