@@ -20,7 +20,7 @@ export class Player extends Unit {
   validateName(name) {
     const { MIN_NAME_LENGTH: min, MAX_NAME_LENGTH: max } = Player.CREATION_CONDITION;
     if (validator.isOutOfRange(name.length, min, max)) {
-      throw new Error(ERROR_MESSAGE.OUT_OF_RANGE_PLAYER_NAME);
+      throw new Error(ERROR_MESSAGE.IS_OUT_OF_RANGE({ target: '이름', min, max }, true));
     }
   }
 

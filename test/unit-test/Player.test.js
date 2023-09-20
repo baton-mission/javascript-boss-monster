@@ -44,9 +44,10 @@ describe('플레이어 생성 예외 테스트', () => {
   it.each([{ name: '' }, { name: '스티븐제라드' }, { name: '황금독수리세상을놀라게하다' }])(
     '유효한 글자수가 아닌 플레이어 이름을 입력하면 에러가 발생한다.',
     ({ name }) => {
+      const { MIN_NAME_LENGTH: min, MAX_NAME_LENGTH: max } = Player.CREATION_CONDITION;
       expect(() => {
         new Player({ name, hp: 100, mp: 100 });
-      }).toThrow(ERROR_MESSAGE.OUT_OF_RANGE_PLAYER_NAME);
+      }).toThrow(ERROR_MESSAGE.IS_OUT_OF_RANGE({ target: '이름', min, max }, true));
     }
   );
 
