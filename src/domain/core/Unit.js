@@ -40,24 +40,38 @@ class Unit {
     return this._skills;
   }
 
+  increaseStatus(field, limit, value) {
+    const updatedValue = this._status[field] + value;
+    if (this._status[limit] && updatedValue > this._status[limit]) {
+      this._status[field] = this._status[limit];
+      return;
+    }
+    this._status[field] = updatedValue;
+  }
+
+  decreaseStatus(field, value) {
+    const updatedValue = this._status[field] - value;
+    if (updatedValue < 0) {
+      this._status[field] = 0;
+      return;
+    }
+    this._status[field] = updatedValue;
+  }
+
   increaseHp(hp) {
-    const updatedHp = this._status.hp + hp;
-    this._status.hp = updatedHp > this._status.maxHp ? this._status.maxHp : updatedHp;
+    this.increaseStatus('hp', 'maxHp', hp);
   }
 
   decreaseHp(damage) {
-    const updatedHp = this._status.hp - damage;
-    this._status.hp = updatedHp >= 0 ? updatedHp : 0;
+    this.decreaseStatus('hp', damage);
   }
 
   increaseMp(mp) {
-    const updatedMp = this._status.mp + mp;
-    this._status.mp = updatedMp > this._status.maxMp ? this._status.maxMp : updatedMp;
+    this.increaseStatus('mp', 'maxMp', mp);
   }
 
   decreaseMp(mp) {
-    const updatedMp = this._status.mp - mp;
-    this._status.mp = updatedMp >= 0 ? updatedMp : 0;
+    this.decreaseStatus('mp', mp);
   }
 
   learnSkill(skillName, skill) {
