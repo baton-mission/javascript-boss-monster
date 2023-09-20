@@ -1,4 +1,5 @@
 import ERROR_MESSAGE from '../../constants/error';
+import * as validator from '../../utils/validator';
 
 class Unit {
   _status = {
@@ -8,7 +9,7 @@ class Unit {
   _skills = new Map();
 
   constructor({ name, hp, mp }) {
-    this.validate();
+    this.validate(hp, mp);
     this.name = name;
     if (hp) {
       this.initialHp = hp;
@@ -41,7 +42,24 @@ class Unit {
     return this._skills;
   }
 
-  validate() {}
+  validate(hp, mp) {
+    this.validateHp(hp);
+    if (typeof mp !== 'undefined') {
+      this.validateMp(mp);
+    }
+  }
+
+  validateHp(hp) {
+    if (typeof hp !== 'number') throw new Error(ERROR_MESSAGE.IS_NOT_NUMBER('HP'));
+    if (validator.isDecimal(hp)) throw new Error(ERROR_MESSAGE.IS_DECIMAL('HP'));
+    if (hp <= 0) throw new Error(ERROR_MESSAGE.IS_BELOW_ZERO('HP'));
+  }
+
+  validateMp(mp) {
+    if (typeof mp !== 'number') throw new Error(ERROR_MESSAGE.IS_NOT_NUMBER('MP'));
+    if (validator.isDecimal(mp)) throw new Error(ERROR_MESSAGE.IS_DECIMAL('MP'));
+    if (mp <= 0) throw new Error(ERROR_MESSAGE.IS_BELOW_ZERO('MP'));
+  }
 
   increaseStatus(field, limit, value) {
     const updatedValue = this._status[field] + value;
