@@ -4,9 +4,11 @@ import Unit from '../../src/domain/core/Unit';
 
 describe('유닛 테스트', () => {
   let unit;
+  let skill;
 
   beforeEach(() => {
     unit = new Unit({ name: '유닛', hp: 100, mp: 100 });
+    skill = new Skill(unit, { skillName: '스킬', requireMp: 0 });
   });
 
   it('유닛은 체력을 보유한다.', () => {
@@ -15,12 +17,11 @@ describe('유닛 테스트', () => {
 
   it('유닛은 스킬을 배울 수 있다.', () => {
     expect(unit.skills.size).toBe(0);
-    unit.learnSkill('스킬', new Skill(unit, { skillName: '스킬', requireMp: 0 }));
+    unit.learnSkill(skill.skillName, skill);
     expect(unit.skills.size).toBe(1);
   });
 
   it('동일한 스킬을 배울 시 에러를 발생시킨다.', () => {
-    const skill = new Skill(unit, { skillName: '스킬', requireMp: 0 });
     unit.learnSkill(skill.skillName, skill);
 
     expect(() => {
@@ -30,7 +31,6 @@ describe('유닛 테스트', () => {
 
   it('유닛은 스킬을 사용할 수 있다.', () => {
     const enemy = new Unit({ name: '몬스터', hp: 100 });
-    const skill = new Skill(unit, { skillName: '스킬', requireMp: 0 });
     unit.learnSkill('스킬', skill);
 
     const skillSpy = jest.spyOn(skill, 'use');
