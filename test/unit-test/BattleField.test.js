@@ -1,16 +1,16 @@
+import BattleFiled from '../../src/domain/BattleField';
 import { Monster, Player } from '../../src/domain/units';
 
 describe('전장 테스트', () => {
   let battleField;
+  let player;
 
   beforeEach(() => {
-    battleField = new BattleField();
+    player = new Player({ name: '용사', hp: 120, mp: 80 });
+    battleField = new BattleFiled(player);
   });
 
-  it('전장은 조작할 플레이어를 입력받는다', () => {
-    const player = new Player({ name: '용사', hp: 120, mp: 80 });
-    battleField.setPlayer(player);
-
+  it('전장은 생성 시 조작할 플레이어를 입력받는다', () => {
     expect(battleField.player).toEqual(player);
   });
 
