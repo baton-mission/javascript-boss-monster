@@ -1,8 +1,7 @@
 import { Player, BossMonster } from '../domain/units/index.js';
-import { ButtonView, InputView } from '../view/inputViews/index.js';
 import { formatUserInput } from '../utils/formatUserInput.js';
 import { BattleFiled } from '../domain/BattleField.js';
-import { BattleFieldView } from '../view/outputViews/BattleFieldView.js';
+import { StatusForm, BattleScreen } from '../view/index.js';
 
 export class Controller {
   /** @type {Player} */
@@ -12,15 +11,8 @@ export class Controller {
   #battleField;
 
   #views = {
-    input: {
-      bossStatusInput: new InputView(document.querySelector('#boss-status-input')),
-      playerNameInput: new InputView(document.querySelector('#name-input')),
-      playerStatusInput: new InputView(document.querySelector('#player-status-input')),
-      startButton: new ButtonView(document.querySelector('#start-raid-button')),
-    },
-    output: {
-      battleFieldScreen: new BattleFieldView(document.querySelector('.game-section')),
-    },
+    statusForm: new StatusForm(),
+    battleScreen: new BattleScreen(),
   };
 
   constructor() {
@@ -36,14 +28,12 @@ export class Controller {
   }
 
   #setViewEvent() {
-    this.#setPlayerSettingEvent();
+    this.#setStatusFormEvent();
   }
 
-  #setPlayerSettingEvent() {
-    this.#views.input.startButton.addEvent('click', (event) => {
-      event.preventDefault();
-      this.#withRetry(() => this.start());
-    });
+  #setStatusFormEvent() {
+    const { startButton } = this.#views.statusForm.inputs;
+    startButton.addEvent('click', () => this.#withRetry(() => this.#start()));
   }
 
   /**
@@ -60,24 +50,26 @@ export class Controller {
     this.#battleField = new BattleFiled(this.#player);
   }
 
-  start() {
-    const name = this.#views.input.playerNameInput.value;
-    const [hp, mp] = this.#views.input.playerStatusInput.value.split(',');
+  #start() {
+    const name = this.#views.statusForm.playerName;
+    const [hp, mp] = this.#views.statusForm.playerStatus.split(',');
     this.#setPlayer({
       name: formatUserInput(name),
       hp: formatUserInput(hp, true),
       mp: formatUserInput(mp, true),
     });
-    this.#setBattleField(this.#player);
-    const bossHp = this.#views.input.bossStatusInput.value;
+    this.#setBattleField();
+
+    const { bossHp } = this.#views.statusForm;
     const monster = new BossMonster({ name: '보스 몬스터', hp: formatUserInput(bossHp, true) });
     this.#battleField.setEnemy(monster);
+
     this.openBattle();
   }
 
   openBattle() {
-    this.#views.output.battleFieldScreen.show();
-    const bossShape = this.#battleField.enemy.status.appearance;
-    this.#views.output.battleFieldScreen.showMonster(bossShape);
+    this.#views.battleScreen.show();
+    this.#views.battleScreen.setEnemy(this.#battleField.enemy.status);
+    this.#views.battleScreen.setPlayer(this.#battleField.player.status);
   }
 }

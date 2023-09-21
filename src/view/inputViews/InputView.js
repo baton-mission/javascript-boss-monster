@@ -1,22 +1,7 @@
-export class InputView {
-  #target;
+import { View } from '../core/View.js';
 
-  /**
-   * @param {HTMLInputElement} target
-   */
-  constructor(target) {
-    this.#target = target;
-  }
-
-  /**
-   * @param {string} event
-   * @param {function} handler
-   */
-  addEvent(event, handler) {
-    this.#target.addEventListener(event, handler);
-  }
-
+export class InputView extends View {
   get value() {
-    return this.#target.value;
+    return this.$target.value;
   }
 }

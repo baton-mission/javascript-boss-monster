@@ -1,18 +1,14 @@
-export class ButtonView {
-  #target;
+import { View } from '../core/View.js';
 
-  /**
-   * @param {HTMLButtonElement} target
-   */
-  constructor(target) {
-    this.#target = target;
-  }
-
+export class ButtonView extends View {
   /**
    * @param {string} event
    * @param {(event: MouseEvent) => void} handler
    */
   addEvent(event, handler) {
-    this.#target.addEventListener(event, handler);
+    this.$target.addEventListener(event, (e) => {
+      e.preventDefault();
+      handler();
+    });
   }
 }
