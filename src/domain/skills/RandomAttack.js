@@ -1,5 +1,5 @@
-import { Random } from '../../utils/random';
-import Attack from '../core/skills/Attack';
+import { Random } from '../../utils/random.js';
+import Attack from '../core/skills/Attack.js';
 
 /**
  * @typedef {import('../core/units/Unit').Unit} Unit

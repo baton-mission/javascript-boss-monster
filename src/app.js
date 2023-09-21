@@ -1,5 +1,8 @@
+import { Controller } from './controller/Controller.js';
+
 const app = () => {
-  console.log('어플리케이션을 시작합니다');
+  const controller = new Controller();
+  controller.start();
 };
 
 export default app;
