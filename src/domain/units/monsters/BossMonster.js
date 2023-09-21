@@ -1,7 +1,7 @@
-import { Monster } from '../../core/units/Monster';
-import { RandomAttack } from '../../skills';
-import * as validator from '../../../utils/validator';
-import { ERROR_MESSAGE } from '../../../constants/error';
+import { Monster } from '../../core/units/Monster.js';
+import { RandomAttack } from '../../skills/index.js';
+import * as validator from '../../../utils/validator.js';
+import { ERROR_MESSAGE } from '../../../constants/error.js';
 
 /**
  * @typedef {Object} MonsterCondition

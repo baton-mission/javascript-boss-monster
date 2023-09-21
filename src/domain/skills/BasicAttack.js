@@ -1,4 +1,4 @@
-import Attack from '../core/skills/Attack';
+import Attack from '../core/skills/Attack.js';
 
 /**
  * @typedef {import('../core/units/Unit').Unit} Unit

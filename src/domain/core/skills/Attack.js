@@ -1,4 +1,4 @@
-import { Skill } from './Skill';
+import { Skill } from './Skill.js';
 
 /**
  * @typedef {import('../units/Unit').Unit} Unit

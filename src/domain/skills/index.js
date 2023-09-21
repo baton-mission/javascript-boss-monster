@@ -1,3 +1,3 @@
-export * from './BasicAttack';
-export * from './MagicAttack';
-export * from './RandomAttack';
+export * from './BasicAttack.js';
+export * from './MagicAttack.js';
+export * from './RandomAttack.js';

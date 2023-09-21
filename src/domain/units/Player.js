@@ -1,7 +1,7 @@
-import { Unit } from '../core/units/Unit';
-import { BasicAttack, MagicAttack } from '../skills';
-import * as validator from '../../utils/validator';
-import { ERROR_MESSAGE } from '../../constants/error';
+import { Unit } from '../core/units/Unit.js';
+import { BasicAttack, MagicAttack } from '../skills/index.js';
+import * as validator from '../../utils/validator.js';
+import { ERROR_MESSAGE } from '../../constants/error.js';
 
 export class Player extends Unit {
   static CREATION_CONDITION = Object.freeze({

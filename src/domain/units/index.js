@@ -1,3 +1,3 @@
-export * from './Player';
+export * from './Player.js';
 
-export * from './monsters/BossMonster';
+export * from './monsters/BossMonster.js';

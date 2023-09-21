@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE } from '../../../constants/error';
-import * as validator from '../../../utils/validator';
+import { ERROR_MESSAGE } from '../../../constants/error.js';
+import * as validator from '../../../utils/validator.js';
 
 /**
  * @typedef {import('../skills/Skill').Skill} Skill
