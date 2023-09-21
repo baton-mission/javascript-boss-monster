@@ -67,7 +67,7 @@ export class BattleScreen {
 
   showFailedRaid(name, turn) {
     const message = GAME_MESSAGE.FAILED_RAID_BOSS(name, turn);
-    console.log(message);
+    this._children.output.bossShape.addText(message);
   }
 
   show() {

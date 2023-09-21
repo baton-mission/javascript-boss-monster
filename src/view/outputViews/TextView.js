@@ -7,4 +7,8 @@ export class TextView extends View {
   setText(text) {
     this.$target.textContent = text;
   }
+
+  addText(text) {
+    this.$target.textContent += text;
+  }
 }
