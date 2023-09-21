@@ -11,7 +11,7 @@ import Attack from '../core/skills/Attack.js';
 export class MagicAttack extends Attack {
   static SKILL_NAME = '🪄 마법 공격';
 
-  static DAMAGE = 30;
+  static DAMAGE = 20;
 
   static REQUIRED_MP = 30;
 
