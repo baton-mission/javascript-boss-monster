@@ -21,6 +21,14 @@ export class Controller {
     this.#setViewEvent();
   }
 
+  #withRetry(action) {
+    try {
+      action();
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
   #setViewEvent() {
     this.#setPlayerSettingEvent();
   }
@@ -28,21 +36,8 @@ export class Controller {
   #setPlayerSettingEvent() {
     this.#views.startButton.addEvent('click', (event) => {
       event.preventDefault();
-      this.start();
+      this.#withRetry(() => this.start());
     });
-  }
-
-  start() {
-    const name = this.#views.playerNameInput.value;
-    const [hp, mp] = this.#views.playerStatusInput.value.split(',');
-    this.setPlayer({
-      name: formatUserInput(name),
-      hp: formatUserInput(hp, true),
-      mp: formatUserInput(mp, true),
-    });
-    this.#setBattleField(this.#player);
-    const bossHp = this.#views.bossStatus.value;
-    this.setBoss({ hp: formatUserInput(bossHp, true) });
   }
 
   /**
@@ -50,25 +45,26 @@ export class Controller {
    * @param {number} hp
    * @param {number} mp
    */
-  setPlayer({ name, hp, mp }) {
-    try {
-      this.#player = new Player({ name, hp, mp });
-      console.log(this.#player);
-    } catch (e) {
-      alert(e.message);
-    }
+  #setPlayer({ name, hp, mp }) {
+    this.#player = new Player({ name, hp, mp });
   }
 
   #setBattleField() {
+    if (!this.#player) return;
     this.#battleField = new BattleFiled(this.#player);
   }
 
-  setBoss({ hp }) {
-    try {
-      const monster = new BossMonster({ name: '보스 몬스터', hp });
-      this.#battleField.setEnemy(monster);
-    } catch (e) {
-      alert(e.message);
-    }
+  start() {
+    const name = this.#views.playerNameInput.value;
+    const [hp, mp] = this.#views.playerStatusInput.value.split(',');
+    this.#setPlayer({
+      name: formatUserInput(name),
+      hp: formatUserInput(hp, true),
+      mp: formatUserInput(mp, true),
+    });
+    this.#setBattleField(this.#player);
+    const bossHp = this.#views.bossStatus.value;
+    const monster = new BossMonster({ name: '보스 몬스터', hp: bossHp });
+    this.#battleField.setEnemy(monster);
   }
 }
