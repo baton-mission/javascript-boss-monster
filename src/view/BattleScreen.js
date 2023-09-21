@@ -1,8 +1,9 @@
 import { TextView } from './outputViews/index.js';
 import { SkillWindow } from './inputViews/index.js';
 import { GAME_MESSAGE } from '../constants/message.js';
+import { ViewComponent } from './core/ViewComponent.js';
 
-export class BattleScreen {
+export class BattleScreen extends ViewComponent {
   _children = {
     inputs: {
       skillWindow: new SkillWindow('.command'),
