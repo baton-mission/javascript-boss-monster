@@ -63,8 +63,8 @@ export class BossMonster extends Monster {
    *  mp?: number;
    * }} params
    */
-  constructor({ name, hp, mp }) {
-    super({ name, hp, mp });
+
+  _validateSpec({ hp }) {
     this.validateHpRange(hp);
   }
 

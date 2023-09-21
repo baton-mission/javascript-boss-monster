@@ -11,16 +11,7 @@ export class Player extends Unit {
     TOTAL_HP_MP: 200,
   });
 
-  /**
-   * @constructor
-   * @param {{
-   *  name: string;
-   *  hp: number;
-   *  mp: number;
-   * }} params
-   */
-  constructor({ name, hp, mp }) {
-    super({ name, hp, mp });
+  _validateSpec({ name, hp, mp }) {
     this.validateName(name);
     this.validateTotalHpMp(hp, mp);
   }

@@ -38,7 +38,7 @@ export class Unit {
    * }} status
    */
   constructor({ name, hp, mp }) {
-    this.#validate(hp, mp);
+    this.#validate({ name, hp, mp });
     this.#setName(name);
     if (hp) {
       this.#setInitialHp(hp);
@@ -91,12 +91,15 @@ export class Unit {
    * @param {number} hp
    * @param {number} mp
    */
-  #validate(hp, mp) {
+  #validate({ name, hp, mp }) {
+    this._validateSpec({ name, hp, mp });
     this.#validateHp(hp);
     if (typeof mp !== 'undefined') {
       this.#validateMp(mp);
     }
   }
+
+  _validateSpec() {}
 
   /**
    * @param {number} hp
