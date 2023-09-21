@@ -1,11 +1,11 @@
 import { TextView } from './outputViews/index.js';
+import { SkillWindow } from './inputViews/index.js';
 
 export class BattleScreen {
   _children = {
-    // inputs: {
-    //   basicAttack,
-    //   magicAttack,
-    // },
+    inputs: {
+      skillWindow: new SkillWindow('.command'),
+    },
     output: {
       bossHp: new TextView('#boss-hp'),
       bossShape: new TextView('#boss-shape'),

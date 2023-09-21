@@ -9,7 +9,7 @@ import Attack from '../core/skills/Attack.js';
  * @extends {Attack}
  */
 export class MagicAttack extends Attack {
-  static SKILL_NAME = '마법 공격';
+  static SKILL_NAME = '🪄 마법 공격';
 
   static DAMAGE = 30;
 
