@@ -159,7 +159,7 @@ export class Unit {
   decreaseHp(damage) {
     this.#decreaseStatus('hp', damage);
     this.decreaseHpEffect();
-    if (!this._status.hp) {
+    if (this._status.hp <= 0) {
       this.dead();
     }
   }

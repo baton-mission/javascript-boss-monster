@@ -4,6 +4,8 @@
  * @typedef {import('./core/skills/Skill').Skill} Skill
  */
 
+import { ERROR_MESSAGE } from '../constants/error.js';
+
 export class BattleFiled {
   #turn = 1;
 
@@ -12,6 +14,8 @@ export class BattleFiled {
   #enemy;
 
   #winner = null;
+
+  #disable = false;
 
   /**
    * @param {Player} player
@@ -58,6 +62,9 @@ export class BattleFiled {
    * @param {Skill} enemySkill
    */
   processTurn(playerSkill, enemySkill) {
+    if (this.#disable) {
+      throw new Error(ERROR_MESSAGE.IS_ENDED_GAME);
+    }
     this.playerUseSkill(playerSkill);
     this.checkWinner();
     if (this.#winner) {
@@ -87,12 +94,17 @@ export class BattleFiled {
 
   checkWinner() {
     if (this.#player.status.isDead) {
-      this.#winner = this.#enemy;
+      this.setWinner(this.#enemy);
       this.#enemy.setWinner();
       return;
     }
     if (this.#enemy.status.isDead) {
-      this.#winner = this.#player;
+      this.setWinner(this.#player);
     }
+  }
+
+  setWinner(winner) {
+    this.#winner = winner;
+    this.#disable = true;
   }
 }

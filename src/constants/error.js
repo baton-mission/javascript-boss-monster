@@ -13,4 +13,6 @@ export const ERROR_MESSAGE = Object.freeze({
   INSUFFICIENT_MP: '시전하는데 필요한 MP가 부족합니다!',
 
   UNKNOWN_CONDITION_CODE: '존재하지 않는 상태 코드입니다!',
+
+  IS_ENDED_GAME: '종료된 전투입니다! 게임을 재시작해주세요!',
 });
