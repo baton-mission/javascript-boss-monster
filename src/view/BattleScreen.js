@@ -1,5 +1,6 @@
 import { TextView } from './outputViews/index.js';
 import { SkillWindow } from './inputViews/index.js';
+import { GAME_MESSAGE } from '../constants/message.js';
 
 export class BattleScreen {
   _children = {
@@ -49,6 +50,24 @@ export class BattleScreen {
 
   setEnemyHp(hp, maxHp) {
     this._children.output.bossHp.setText(`[${hp}/${maxHp}]`);
+  }
+
+  setResult({ name, turn, isWin = false }) {
+    if (isWin) {
+      this.showSuccessRaid(name, turn);
+      return;
+    }
+    this.showFailedRaid(name, turn);
+  }
+
+  showSuccessRaid(name, turn) {
+    const message = GAME_MESSAGE.SUCCESS_RAID_BOSS(name, turn);
+    this._children.output.bossShape.setText(message);
+  }
+
+  showFailedRaid(name, turn) {
+    const message = GAME_MESSAGE.FAILED_RAID_BOSS(name, turn);
+    console.log(message);
   }
 
   show() {

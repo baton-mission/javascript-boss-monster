@@ -88,19 +88,16 @@ export class Controller {
   }
 
   checkRaidEnd() {
-    if (this.#battleField.winner === this.#player) {
-      this.successRaid();
-    }
-    if (this.#battleField.winner === this.#battleField.enemy) {
-      this.failedRaid();
+    if (this.#battleField.winner) {
+      this.endRaid();
     }
   }
 
-  successRaid() {
-    console.log('승리!');
-  }
-
-  failedRaid() {
-    console.log('패배!');
+  endRaid() {
+    this.#views.battleScreen.setResult({
+      name: this.#player.status.name,
+      turn: this.#battleField.turn,
+      isWin: this.#battleField.winner === this.#player,
+    });
   }
 }
