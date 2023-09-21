@@ -4,6 +4,7 @@
  * @param {number} max
  */
 export const isOutOfRange = (value, min, max) => value < min || value > max;
+
 /**
  * @param {number} value
  */

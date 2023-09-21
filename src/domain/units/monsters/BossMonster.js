@@ -1,7 +1,7 @@
 import { Monster } from '../../core/units/Monster';
 import { RandomAttack } from '../../skills';
 import * as validator from '../../../utils/validator';
-import ERROR_MESSAGE from '../../../constants/error';
+import { ERROR_MESSAGE } from '../../../constants/error';
 
 /**
  * @typedef {Object} MonsterCondition

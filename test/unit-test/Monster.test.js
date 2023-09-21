@@ -1,7 +1,7 @@
 import { Player } from '../../src/domain/units';
 import { RandomAttack } from '../../src/domain/skills';
 import { Random } from '../../src/utils/random';
-import ERROR_MESSAGE from '../../src/constants/error';
+import { ERROR_MESSAGE } from '../../src/constants/error';
 import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
 
 jest.spyOn(Random, 'calculateBossDMG').mockReturnValue(13);

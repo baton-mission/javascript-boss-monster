@@ -1,4 +1,4 @@
-import ERROR_MESSAGE from '../../src/constants/error';
+import { ERROR_MESSAGE } from '../../src/constants/error';
 import { Skill } from '../../src/domain/core/skills/Skill';
 import { Unit } from '../../src/domain/core/units/Unit';
 

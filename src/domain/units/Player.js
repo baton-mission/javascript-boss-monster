@@ -1,7 +1,7 @@
 import { Unit } from '../core/units/Unit';
 import { BasicAttack, MagicAttack } from '../skills';
 import * as validator from '../../utils/validator';
-import ERROR_MESSAGE from '../../constants/error';
+import { ERROR_MESSAGE } from '../../constants/error';
 
 export class Player extends Unit {
   static CREATION_CONDITION = Object.freeze({

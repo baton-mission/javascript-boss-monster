@@ -1,6 +1,6 @@
 import { Player } from '../../src/domain/units';
 import { MagicAttack, BasicAttack } from '../../src/domain/skills';
-import ERROR_MESSAGE from '../../src/constants/error';
+import { ERROR_MESSAGE } from '../../src/constants/error';
 import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
 
 describe('플레이어 테스트', () => {

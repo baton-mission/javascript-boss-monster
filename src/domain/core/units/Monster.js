@@ -1,5 +1,5 @@
 import { Unit } from './Unit';
-import ERROR_MESSAGE from '../../../constants/error';
+import { ERROR_MESSAGE } from '../../../constants/error';
 
 /**
  * @typedef {Object} MonsterStatus

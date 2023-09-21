@@ -1,4 +1,4 @@
-import ERROR_MESSAGE from '../../../constants/error';
+import { ERROR_MESSAGE } from '../../../constants/error';
 import * as validator from '../../../utils/validator';
 
 /**
