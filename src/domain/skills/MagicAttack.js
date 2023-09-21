@@ -1,5 +1,13 @@
 import Attack from '../core/skills/Attack';
 
+/**
+ * @typedef {import('../core/units/Unit').Unit} Unit
+ */
+
+/**
+ * @class
+ * @extends {Attack}
+ */
 export class MagicAttack extends Attack {
   static SKILL_NAME = '마법 공격';
 
@@ -7,6 +15,9 @@ export class MagicAttack extends Attack {
 
   static REQUIRED_MP = 30;
 
+  /**
+   * @param {Unit} caster
+   */
   static of(caster) {
     return new MagicAttack(caster, {
       skillName: MagicAttack.SKILL_NAME,

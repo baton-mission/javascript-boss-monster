@@ -1,77 +1,140 @@
 import ERROR_MESSAGE from '../../../constants/error';
 import * as validator from '../../../utils/validator';
 
-class Unit {
+/**
+ * @typedef {import('../skills/Skill').Skill} Skill
+ */
+
+/**
+ * @typedef {Object} UnitStatus
+ * @property {string} name - 유닛의 이름
+ * @property {number} hp - 현재 체력 (HP)
+ * @property {number} mp - 현재 마력 (MP)
+ * @property {number} maxHp - 최대 체력 (HP)
+ * @property {number} maxMp - 최대 마력 (MP)
+ * @property {boolean} isDead - 유닛의 사망 여부
+ */
+
+/**
+ * @class
+ * @abstract
+ */
+export class Unit {
+  /** @protected */
   _status = {
     name: '',
     isDead: false,
   };
 
+  /** @protected */
   _skills = new Map();
 
+  /**
+   * @constructor
+   * @param {{
+   *  name: string;
+   *  hp: number;
+   *  mp: number;
+   * }} status
+   */
   constructor({ name, hp, mp }) {
-    this.validate(hp, mp);
-    this.name = name;
+    this.#validate(hp, mp);
+    this.#setName(name);
     if (hp) {
-      this.initialHp = hp;
+      this.#setInitialHp(hp);
     }
     if (mp) {
-      this.initialMp = mp;
+      this.#setInitialMp(mp);
     }
-    this.learnBasicSkills();
+    this._learnBasicSkills();
   }
 
-  set name(name) {
+  /**
+   * @param {string} name
+   */
+  #setName(name) {
     this._status.name = name;
   }
 
-  set initialHp(hp) {
+  /**
+   * @param {number} hp
+   */
+  #setInitialHp(hp) {
     this._status.hp = hp;
     this._status.maxHp = hp;
   }
 
-  set initialMp(mp) {
+  /**
+   * @param {number} mp
+   */
+  #setInitialMp(mp) {
     this._status.mp = mp;
     this._status.maxMp = mp;
   }
 
+  /**
+   * @returns {UnitStatus}
+   */
   get status() {
     return { ...this._status };
   }
 
+  /**
+   * 유닛이 가지고 있는 스킬 목록입니다.
+   * @type {Map<string, import('../../core/skills/Skill').SkillInstance>}
+   */
   get skills() {
     return this._skills;
   }
 
-  validate(hp, mp) {
-    this.validateHp(hp);
+  /**
+   * @param {number} hp
+   * @param {number} mp
+   */
+  #validate(hp, mp) {
+    this.#validateHp(hp);
     if (typeof mp !== 'undefined') {
-      this.validateMp(mp);
+      this.#validateMp(mp);
     }
   }
 
-  validateHp(hp) {
+  /**
+   * @param {number} hp
+   */
+  #validateHp(hp) {
     if (typeof hp !== 'number') throw new Error(ERROR_MESSAGE.IS_NOT_NUMBER('HP'));
     if (validator.isDecimal(hp)) throw new Error(ERROR_MESSAGE.IS_DECIMAL('HP'));
     if (hp <= 0) throw new Error(ERROR_MESSAGE.IS_BELOW_ZERO('HP'));
   }
 
-  validateMp(mp) {
+  /**
+   * @param {number} mp
+   */
+  #validateMp(mp) {
     if (typeof mp !== 'number') throw new Error(ERROR_MESSAGE.IS_NOT_NUMBER('MP'));
     if (validator.isDecimal(mp)) throw new Error(ERROR_MESSAGE.IS_DECIMAL('MP'));
     if (mp <= 0) throw new Error(ERROR_MESSAGE.IS_BELOW_ZERO('MP'));
   }
 
-  increaseStatus(field, limit, value) {
+  /**
+   * @param {string} field - 변경시킬 수치의 스테이터스 필드명
+   * @param {number} value - 수치의 변경값
+   * @param {number} limit - 수치의 한계값
+   */
+  #increaseStatus(field, value, limit = Number.MAX_SAFE_INTEGER) {
     const updatedValue = this._status[field] + value;
-    if (this._status[limit] && updatedValue > this._status[limit]) {
-      this._status[field] = this._status[limit];
+    if (updatedValue > limit) {
+      this._status[field] = limit;
       return;
     }
     this._status[field] = updatedValue;
   }
 
-  decreaseStatus(field, value) {
+  /**
+   * @param {import('../../BattleField')} field
+   * @param {number} values
+   */
+  #decreaseStatus(field, value) {
     const updatedValue = this._status[field] - value;
     if (updatedValue < 0) {
       this._status[field] = 0;
@@ -80,12 +143,18 @@ class Unit {
     this._status[field] = updatedValue;
   }
 
+  /**
+   * @param {number} hp
+   */
   increaseHp(hp) {
-    this.increaseStatus('hp', 'maxHp', hp);
+    this.#increaseStatus('hp', hp, this._status.maxHp);
   }
 
+  /**
+   * @param {number} damage
+   */
   decreaseHp(damage) {
-    this.decreaseStatus('hp', damage);
+    this.#decreaseStatus('hp', damage);
     this.decreaseHpEffect();
     if (!this._status.hp) {
       this.dead();
@@ -94,18 +163,28 @@ class Unit {
 
   decreaseHpEffect() {}
 
+  /**
+   * @param {number} mp
+   */
   increaseMp(mp) {
-    this.increaseStatus('mp', 'maxMp', mp);
+    this.#increaseStatus('mp', mp, this._status.maxMp);
   }
 
+  /**
+   * @param {number} mp
+   */
   decreaseMp(mp) {
-    this.decreaseStatus('mp', mp);
+    this.#decreaseStatus('mp', mp);
   }
 
   dead() {
     this._status.isDead = true;
   }
 
+  /**
+   * @param {string} skillName
+   * @param {Skill} skill
+   */
   learnSkill(skillName, skill) {
     if (this._skills.get(skillName)) {
       throw new Error(ERROR_MESSAGE.EXISTING_SKILL);
@@ -113,15 +192,27 @@ class Unit {
     this._skills.set(skillName, skill);
   }
 
-  learnBasicSkills() {}
+  /**
+   * 기본 스킬을 배우는 추상메서드입니다.
+   * @abstract
+   * @protected
+   */
+  _learnBasicSkills() {}
 
+  /**
+   * @param {string} skillName
+   * @param {Unit} enemy
+   */
   useSkill(skillName, enemy) {
     const skill = this._skills.get(skillName);
-    this.validateUseSkill(skill);
+    this.#validateUseSkill(skill);
     skill.use(enemy);
   }
 
-  validateUseSkill(skill) {
+  /**
+   * @param {Skill} skill
+   */
+  #validateUseSkill(skill) {
     if (!skill) {
       throw new Error(ERROR_MESSAGE.MISSING_SKILL);
     }
@@ -130,5 +221,3 @@ class Unit {
     }
   }
 }
-
-export default Unit;

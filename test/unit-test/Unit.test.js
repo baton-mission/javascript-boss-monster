@@ -1,9 +1,11 @@
 import ERROR_MESSAGE from '../../src/constants/error';
-import Skill from '../../src/domain/core/skills/Skill';
-import Unit from '../../src/domain/core/units/Unit';
+import { Skill } from '../../src/domain/core/skills/Skill';
+import { Unit } from '../../src/domain/core/units/Unit';
 
 describe('유닛 테스트', () => {
+  /** @type {Unit} */
   let unit;
+  /** @type {Skill} */
   let skill;
 
   beforeEach(() => {
@@ -78,10 +80,13 @@ describe('유닛 테스트', () => {
     expect(unit.status.mp).toBe(0);
   });
 
-  it.each([{ damage: 100 }, { damage: 110 }])('유닛의 hp가 0 이하로 떨어지면 dead 처리 된다.', ({ damage }) => {
-    unit.decreaseHp(damage);
-    expect(unit.status.isDead).toBeTruthy();
-  });
+  it.each([{ damage: 100 }, { damage: 110 }])(
+    '유닛의 hp가 0 이하로 떨어지면 dead 처리 된다.',
+    ({ damage }) => {
+      unit.decreaseHp(damage);
+      expect(unit.status.isDead).toBeTruthy();
+    }
+  );
 });
 
 describe('유닛 생성 예외 테스트', () => {
@@ -103,17 +108,23 @@ describe('유닛 생성 예외 테스트', () => {
     }
   );
 
-  it.each([{ hp: 0.1 }, { hp: 150.5 }])('정수가 아닌 $hp를 hp에 입력하면 에러가 발생한다.', ({ hp }) => {
-    expect(() => {
-      new Unit({ name: '유닛', hp, mp: 100 });
-    }).toThrow(ERROR_MESSAGE.IS_DECIMAL('HP'));
-  });
+  it.each([{ hp: 0.1 }, { hp: 150.5 }])(
+    '정수가 아닌 $hp를 hp에 입력하면 에러가 발생한다.',
+    ({ hp }) => {
+      expect(() => {
+        new Unit({ name: '유닛', hp, mp: 100 });
+      }).toThrow(ERROR_MESSAGE.IS_DECIMAL('HP'));
+    }
+  );
 
-  it.each([{ mp: 0.1 }, { mp: 150.5 }])('정수가 아인 $mp를 mp에 입력하면 에러가 발생한다.', ({ mp }) => {
-    expect(() => {
-      new Unit({ name: '유닛', hp: 100, mp });
-    }).toThrow(ERROR_MESSAGE.IS_DECIMAL('MP'));
-  });
+  it.each([{ mp: 0.1 }, { mp: 150.5 }])(
+    '정수가 아인 $mp를 mp에 입력하면 에러가 발생한다.',
+    ({ mp }) => {
+      expect(() => {
+        new Unit({ name: '유닛', hp: 100, mp });
+      }).toThrow(ERROR_MESSAGE.IS_DECIMAL('MP'));
+    }
+  );
 
   it.each([{ hp: 0 }, { hp: -10 }])('0 이하인 $hp를 hp에 입력하면 에러가 발생한다.', ({ hp }) => {
     expect(() => {

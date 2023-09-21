@@ -1,4 +1,4 @@
-import BattleFiled from '../../src/domain/BattleField';
+import { BattleFiled } from '../../src/domain/BattleField';
 import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
 import { Player } from '../../src/domain/units';
 import { BasicAttack, MagicAttack, RandomAttack } from '../../src/domain/skills';
@@ -7,7 +7,9 @@ import { Random } from '../../src/utils/random';
 jest.spyOn(Random, 'calculateBossDMG').mockReturnValue(10);
 
 describe('전장 테스트', () => {
+  /** @type {BattleFiled} */
   let battleField;
+  /** @type {Player} */
   let player;
 
   beforeEach(() => {
@@ -22,7 +24,6 @@ describe('전장 테스트', () => {
   it('전장은 상대를 입력받는다', () => {
     const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
     battleField.setEnemy(monster);
-
     expect(battleField.enemy).toEqual(monster);
   });
 

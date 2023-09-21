@@ -1,16 +1,48 @@
-import Unit from './Unit';
-import { RandomAttack } from '../../skills';
-import * as validator from '../../../utils/validator';
+import { Unit } from './Unit';
 import ERROR_MESSAGE from '../../../constants/error';
 
+/**
+ * @typedef {Object} MonsterStatus
+ * @property {string} name - 유닛의 이름
+ * @property {number} hp - 현재 체력 (HP)
+ * @property {number} mp - 현재 마력 (MP)
+ * @property {number} maxHp - 최대 체력 (HP)
+ * @property {number} maxMp - 최대 마력 (MP)
+ * @property {boolean} isDead - 유닛의 사망 여부
+ * @property {string} condition - 유닛의 상태 코드
+ * @property {string} appearance - 유닛의 외형 마크업
+ */
+
+/**
+ * @class
+ * @abstract
+ * @extends {Unit}
+ */
 export class Monster extends Unit {
-  constructor({ name, hp }) {
-    super({ name, hp });
-    this.validateHpRange(hp);
-    this.condition = this.constructor.CONDITIONS.NORMAL.CODE;
+  /**
+   * @constructor
+   * @param {{
+   *  name: string;
+   *  hp: number;
+   *  mp: number;
+   * }} params
+   */
+  constructor({ name, hp, mp }) {
+    super({ name, hp, mp });
+    this.setCondition(this.constructor.CONDITIONS.NORMAL.CODE);
   }
 
-  set condition(code) {
+  /**
+   * @returns {MonsterStatus}
+   */
+  get status() {
+    return { ...this._status };
+  }
+
+  /**
+   * @param {string} code
+   */
+  setCondition(code) {
     const updatedCondition = this.constructor.CONDITIONS[code];
     if (!updatedCondition) {
       throw new Error(ERROR_MESSAGE.UNKNOWN_CONDITION_CODE);
@@ -20,21 +52,10 @@ export class Monster extends Unit {
   }
 
   decreaseHpEffect() {
-    this.condition = this.constructor.CONDITIONS.TAKEN_DAMAGE.CODE;
-  }
-
-  validateHpRange(hp) {
-    const { MIN_INITIAL_HP: min, MAX_INITIAL_HP: max } = this.constructor.CREATION_CONDITION;
-    if (validator.isOutOfRange(hp, min, max)) {
-      throw new Error(ERROR_MESSAGE.IS_OUT_OF_RANGE({ target: 'hp', min, max }));
-    }
-  }
-
-  learnBasicSkills() {
-    this.learnSkill(RandomAttack.SKILL_NAME, RandomAttack.of(this));
+    this.setCondition(this.constructor.CONDITIONS.TAKEN_DAMAGE.CODE);
   }
 
   setWinner() {
-    this.condition = this.constructor.CONDITIONS.RAID_FAILED.CODE;
+    this.setCondition(this.constructor.CONDITIONS.RAID_FAILED.CODE);
   }
 }

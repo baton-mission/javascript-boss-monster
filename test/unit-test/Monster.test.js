@@ -7,7 +7,9 @@ import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
 jest.spyOn(Random, 'calculateBossDMG').mockReturnValue(13);
 
 describe('보스몬스터 테스트', () => {
+  /** @type {BossMonster} */
   let monster;
+  /** @type {Player} */
   let player;
 
   beforeEach(() => {
@@ -29,7 +31,7 @@ describe('보스몬스터 테스트', () => {
     { code: BossMonster.CONDITIONS.TAKEN_DAMAGE.CODE },
     { code: BossMonster.CONDITIONS.RAID_FAILED.CODE },
   ])('보스 몬스터의 상태를 변경하면 외형도 변화한다.', ({ code }) => {
-    monster.condition = code;
+    monster.setCondition(code);
     expect(monster.status.condition).toBe(BossMonster.CONDITIONS[code].CODE);
     expect(monster.status.appearance).toBe(BossMonster.CONDITIONS[code].APPEARANCE);
   });
@@ -42,7 +44,7 @@ describe('보스몬스터 테스트', () => {
 
   it('존재하지 않는 상태코드를 입력시 에러가 발생하며 변화하지 않는다.', () => {
     expect(() => {
-      monster.condition = '가짜_코드';
+      monster.setCondition('가짜_코드');
     }).toThrow(ERROR_MESSAGE.UNKNOWN_CONDITION_CODE);
     expect(monster.status.condition).toBe(BossMonster.CONDITIONS.NORMAL.CODE);
     expect(monster.status.appearance).toBe(BossMonster.CONDITIONS.NORMAL.APPEARANCE);

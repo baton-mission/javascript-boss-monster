@@ -4,7 +4,9 @@ import ERROR_MESSAGE from '../../src/constants/error';
 import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
 
 describe('플레이어 테스트', () => {
+  /** @type {Player} */
   let player;
+  /** @type {BossMonster} */
   let enemy;
 
   beforeEach(() => {
