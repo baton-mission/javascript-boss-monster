@@ -34,10 +34,10 @@ describe('플레이어 테스트', () => {
     expect(player.status.mp).toBe(60);
   });
 
-  it('플레이어는 유닛을 마법 공격 할 시 유닛의 hp가 30 소모하고 플레이어의 mp가 30 소모한다.', () => {
+  it('플레이어는 유닛을 마법 공격 할 시 유닛의 hp가 20 소모하고 플레이어의 mp가 30 소모한다.', () => {
     player.useSkill(MagicAttack.SKILL_NAME, enemy);
 
-    expect(enemy.status.hp).toBe(70);
+    expect(enemy.status.hp).toBe(80);
     expect(player.status.mp).toBe(50);
   });
 });

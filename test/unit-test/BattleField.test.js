@@ -52,23 +52,23 @@ describe('전장 전투 테스트', () => {
 
     expect(battleField.player.status.hp).toBe(110);
     expect(battleField.player.status.mp).toBe(50);
-    expect(battleField.enemy.status.hp).toBe(70);
+    expect(battleField.enemy.status.hp).toBe(80);
     expect(battleField.turn).toBe(2);
 
     battleField.processTurn(BasicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
 
     expect(battleField.player.status.hp).toBe(100);
     expect(battleField.player.status.mp).toBe(60);
-    expect(battleField.enemy.status.hp).toBe(60);
+    expect(battleField.enemy.status.hp).toBe(70);
     expect(battleField.turn).toBe(3);
   });
 
   it('전장은 턴을 진행할때마다 사망한 유닛을 확인하고 우승자를 설정한다.', () => {
-    const player = new Player({ name: '용사', hp: 120, mp: 80 });
+    const player = new Player({ name: '용사', hp: 100, mp: 100 });
     const battleField = new BattleFiled(player);
     const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
     battleField.setEnemy(monster);
-    monster.decreaseHp(60);
+    monster.decreaseHp(70);
 
     battleField.processTurn(MagicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
     expect(battleField.winner).toBeNull();
@@ -82,7 +82,7 @@ describe('전장 전투 테스트', () => {
     const battleField = new BattleFiled(player);
     const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
     battleField.setEnemy(monster);
-    monster.decreaseHp(70);
+    monster.decreaseHp(80);
 
     battleField.processTurn(MagicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
     expect(battleField.winner).toEqual(player);
