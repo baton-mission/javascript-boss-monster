@@ -11,10 +11,12 @@ export class Controller {
   #battleField;
 
   #views = {
-    bossStatus: new InputView(document.querySelector('#boss-status-input')),
-    playerNameInput: new InputView(document.querySelector('#name-input')),
-    playerStatusInput: new InputView(document.querySelector('#player-status-input')),
-    startButton: new ButtonView(document.querySelector('#start-raid-button')),
+    input: {
+      bossStatusInput: new InputView(document.querySelector('#boss-status-input')),
+      playerNameInput: new InputView(document.querySelector('#name-input')),
+      playerStatusInput: new InputView(document.querySelector('#player-status-input')),
+      startButton: new ButtonView(document.querySelector('#start-raid-button')),
+    },
   };
 
   constructor() {
@@ -34,7 +36,7 @@ export class Controller {
   }
 
   #setPlayerSettingEvent() {
-    this.#views.startButton.addEvent('click', (event) => {
+    this.#views.input.startButton.addEvent('click', (event) => {
       event.preventDefault();
       this.#withRetry(() => this.start());
     });
@@ -55,16 +57,16 @@ export class Controller {
   }
 
   start() {
-    const name = this.#views.playerNameInput.value;
-    const [hp, mp] = this.#views.playerStatusInput.value.split(',');
+    const name = this.#views.input.playerNameInput.value;
+    const [hp, mp] = this.#views.input.playerStatusInput.value.split(',');
     this.#setPlayer({
       name: formatUserInput(name),
       hp: formatUserInput(hp, true),
       mp: formatUserInput(mp, true),
     });
     this.#setBattleField(this.#player);
-    const bossHp = this.#views.bossStatus.value;
-    const monster = new BossMonster({ name: '보스 몬스터', hp: bossHp });
+    const bossHp = this.#views.input.bossStatusInput.value;
+    const monster = new BossMonster({ name: '보스 몬스터', hp: formatUserInput(bossHp, true) });
     this.#battleField.setEnemy(monster);
   }
 }
