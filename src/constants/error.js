@@ -1,5 +1,5 @@
 export const ERROR_MESSAGE = Object.freeze({
-  INVALID_TOTAL_HP_MP: 'HP와 MP의 총합이 200이 아닙니다!',
+  INVALID_TOTAL_HP_MP: '플레이어의 HP와 MP의 총합이 200이 아닙니다!',
 
   IS_OUT_OF_RANGE: ({ target, min, max }, unit = '') =>
     `${min}~${max}${unit} 사이의 ${target}을 입력해주세요!`,

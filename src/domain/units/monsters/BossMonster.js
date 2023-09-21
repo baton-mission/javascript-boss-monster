@@ -74,7 +74,7 @@ export class BossMonster extends Monster {
   validateHpRange(hp) {
     const { MIN_INITIAL_HP: min, MAX_INITIAL_HP: max } = this.constructor.CREATION_CONDITION;
     if (validator.isOutOfRange(hp, min, max)) {
-      throw new Error(ERROR_MESSAGE.IS_OUT_OF_RANGE({ target: 'hp', min, max }));
+      throw new Error(ERROR_MESSAGE.IS_OUT_OF_RANGE({ target: '보스 몬스터 HP', min, max }));
     }
   }
 

@@ -70,7 +70,7 @@ describe('몬스터 생성 예외 테스트', () => {
 
       expect(() => {
         new BossMonster({ name: '플레이어', hp });
-      }).toThrow(ERROR_MESSAGE.IS_OUT_OF_RANGE({ target: 'hp', min, max }));
+      }).toThrow(ERROR_MESSAGE.IS_OUT_OF_RANGE({ target: '보스 몬스터 HP', min, max }));
     }
   );
 });
