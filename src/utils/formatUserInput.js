@@ -5,7 +5,7 @@
  * @returns {string | number}
  */
 export const formatUserInput = (input, formatToNumber = false) => {
-  if (!input.length) return input;
+  if (!input || !input.length) return '';
   let result = input;
   result = result.trim();
   if (Number.isNaN(+result)) {

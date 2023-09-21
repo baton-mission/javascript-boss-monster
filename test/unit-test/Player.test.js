@@ -49,7 +49,7 @@ describe('플레이어 생성 예외 테스트', () => {
       const { MIN_NAME_LENGTH: min, MAX_NAME_LENGTH: max } = Player.CREATION_CONDITION;
       expect(() => {
         new Player({ name, hp: 100, mp: 100 });
-      }).toThrow(ERROR_MESSAGE.IS_OUT_OF_RANGE({ target: '이름', min, max }, true));
+      }).toThrow(ERROR_MESSAGE.IS_OUT_OF_RANGE({ target: '이름', min, max }, '자'));
     }
   );
 
