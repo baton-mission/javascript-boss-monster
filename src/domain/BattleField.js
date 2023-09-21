@@ -46,6 +46,13 @@ export class BattleFiled {
     return this.#winner;
   }
 
+  init() {
+    this.#turn = 1;
+    this.#player = null;
+    this.#enemy = null;
+    this.#winner = null;
+  }
+
   /**
    * @param {Monster} enemy
    */

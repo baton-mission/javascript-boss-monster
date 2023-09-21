@@ -99,5 +99,6 @@ export class Controller {
       turn: this.#battleField.turn,
       isWin: this.#battleField.winner === this.#player,
     });
+    this.#battleField.init();
   }
 }
