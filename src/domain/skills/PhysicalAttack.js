@@ -1,14 +1,14 @@
 import Attack from '../core/skills/Attack.js';
 
 /**
- * @typedef {import('../core/units/Unit').Unit} Unit
+ * @typedef {import('../core/units/Unit.js').Unit} Unit
  */
 
 /**
  * @class
  * @extends {Attack}
  */
-export class BasicAttack extends Attack {
+export class PhysicalAttack extends Attack {
   static SKILL_NAME = '⚔️ 물리 공격';
 
   static DAMAGE = 10;
@@ -19,7 +19,7 @@ export class BasicAttack extends Attack {
    * @param {Unit} caster
    */
   static of(caster) {
-    return new BasicAttack(caster, { skillName: BasicAttack.SKILL_NAME, damage: 10 });
+    return new PhysicalAttack(caster, { skillName: PhysicalAttack.SKILL_NAME, damage: 10 });
   }
 
   /** @protected */

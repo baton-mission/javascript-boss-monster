@@ -1,5 +1,5 @@
 import { Unit } from '../core/units/Unit.js';
-import { BasicAttack, MagicAttack } from '../skills/index.js';
+import { PhysicalAttack, MagicAttack } from '../skills/index.js';
 import * as validator from '../../utils/validator.js';
 import { ERROR_MESSAGE } from '../../constants/error.js';
 
@@ -39,7 +39,7 @@ export class Player extends Unit {
 
   /** @protected */
   _learnBasicSkills() {
-    this.learnSkill(BasicAttack.SKILL_NAME, BasicAttack.of(this));
+    this.learnSkill(PhysicalAttack.SKILL_NAME, PhysicalAttack.of(this));
     this.learnSkill(MagicAttack.SKILL_NAME, MagicAttack.of(this));
   }
 }

@@ -1,7 +1,7 @@
 import { BattleFiled } from '../../src/domain/BattleField';
 import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
 import { Player } from '../../src/domain/units';
-import { BasicAttack, MagicAttack, RandomAttack } from '../../src/domain/skills';
+import { PhysicalAttack, MagicAttack, RandomAttack } from '../../src/domain/skills';
 import { Random } from '../../src/utils/random';
 
 jest.spyOn(Random, 'calculateBossDMG').mockReturnValue(10);
@@ -55,7 +55,7 @@ describe('전장 전투 테스트', () => {
     expect(battleField.enemy.status.hp).toBe(80);
     expect(battleField.turn).toBe(2);
 
-    battleField.processTurn(BasicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
+    battleField.processTurn(PhysicalAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
 
     expect(battleField.player.status.hp).toBe(100);
     expect(battleField.player.status.mp).toBe(60);
@@ -105,7 +105,7 @@ describe('전장 전투 테스트', () => {
     expect(battleField.turn).toBe(1);
 
     expect(() => {
-      battleField.processTurn(MagicAttack.SKILL_NAME, BasicAttack.SKILL_NAME);
+      battleField.processTurn(MagicAttack.SKILL_NAME, PhysicalAttack.SKILL_NAME);
     }).toThrow();
 
     expect(battleField.player.status.hp).toBe(180);
@@ -122,12 +122,12 @@ describe('전장 전투 테스트', () => {
 
     expect(battleField.enemy.status.appearance).toBe(BossMonster.CONDITIONS.NORMAL.APPEARANCE);
 
-    battleField.processTurn(BasicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
+    battleField.processTurn(PhysicalAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
     expect(battleField.enemy.status.appearance).toBe(
       BossMonster.CONDITIONS.TAKEN_DAMAGE.APPEARANCE
     );
 
-    battleField.processTurn(BasicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
+    battleField.processTurn(PhysicalAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
     expect(battleField.enemy.status.appearance).toBe(BossMonster.CONDITIONS.RAID_FAILED.APPEARANCE);
   });
 });

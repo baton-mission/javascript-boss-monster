@@ -1,5 +1,5 @@
 import { Player } from '../../src/domain/units';
-import { MagicAttack, BasicAttack } from '../../src/domain/skills';
+import { MagicAttack, PhysicalAttack } from '../../src/domain/skills';
 import { ERROR_MESSAGE } from '../../src/constants/error';
 import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
 
@@ -22,13 +22,13 @@ describe('플레이어 테스트', () => {
 
   it('플레이어는 기본 스킬로 물리 공격과 마법공격을 가진다.', () => {
     expect(player.skills.size).toBe(2);
-    expect(player.skills.get(BasicAttack.SKILL_NAME)).toBeDefined();
+    expect(player.skills.get(PhysicalAttack.SKILL_NAME)).toBeDefined();
     expect(player.skills.get(MagicAttack.SKILL_NAME)).toBeDefined();
   });
 
   it('플레이어는 유닛을 물리 공격 할 시 유닛의 hp가 10 소모하고 플레이어의 mp가 10 회복한다.', () => {
     player.decreaseMp(30);
-    player.useSkill(BasicAttack.SKILL_NAME, enemy);
+    player.useSkill(PhysicalAttack.SKILL_NAME, enemy);
 
     expect(enemy.status.hp).toBe(90);
     expect(player.status.mp).toBe(60);
