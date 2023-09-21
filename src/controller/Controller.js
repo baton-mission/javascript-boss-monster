@@ -2,6 +2,7 @@ import { Player, BossMonster } from '../domain/units/index.js';
 import { ButtonView, InputView } from '../view/inputViews/index.js';
 import { formatUserInput } from '../utils/formatUserInput.js';
 import { BattleFiled } from '../domain/BattleField.js';
+import { BattleFieldView } from '../view/outputViews/BattleFieldView.js';
 
 export class Controller {
   /** @type {Player} */
@@ -16,6 +17,9 @@ export class Controller {
       playerNameInput: new InputView(document.querySelector('#name-input')),
       playerStatusInput: new InputView(document.querySelector('#player-status-input')),
       startButton: new ButtonView(document.querySelector('#start-raid-button')),
+    },
+    output: {
+      battleFieldScreen: new BattleFieldView(document.querySelector('.game-section')),
     },
   };
 
@@ -68,5 +72,12 @@ export class Controller {
     const bossHp = this.#views.input.bossStatusInput.value;
     const monster = new BossMonster({ name: '보스 몬스터', hp: formatUserInput(bossHp, true) });
     this.#battleField.setEnemy(monster);
+    this.openBattle();
+  }
+
+  openBattle() {
+    this.#views.output.battleFieldScreen.show();
+    const bossShape = this.#battleField.enemy.status.appearance;
+    this.#views.output.battleFieldScreen.showMonster(bossShape);
   }
 }

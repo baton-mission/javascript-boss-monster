@@ -26,31 +26,31 @@ export class BossMonster extends Monster {
     NORMAL: {
       CODE: 'NORMAL',
       APPEARANCE: `
-         ^-^
-       / 0 0 \\
-      (   "   )
-       \\  -  /
-        - ^ -
-      `,
+^-^
+/ 0 0 \\
+(   "   )
+\\  -  /
+- ^ -
+`,
     },
     TAKEN_DAMAGE: {
       CODE: 'TAKEN_DAMAGE',
       APPEARANCE: `
-         ^-^
-       / x x \\
-      (   "   )
-       \\  -  /
-        - ^ -
-      `,
+^-^
+/ x x \\
+(   "   )
+\\  -  /
+- ^ -
+`,
     },
     RAID_FAILED: {
       CODE: 'RAID_FAILED',
       APPEARANCE: `
-         ^-^
-       / ^ ^ \\
-      (   "   )
-       \\  3  /
-        - ^ -
+^-^
+/ ^ ^ \\
+(   "   )
+\\  3  /
+- ^ -
       `,
     },
   };
