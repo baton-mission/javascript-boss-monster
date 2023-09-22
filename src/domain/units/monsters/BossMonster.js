@@ -80,6 +80,6 @@ export class BossMonster extends Monster {
 
   /** @protected */
   _learnBasicSkills() {
-    this.learnSkill(RandomAttack.SKILL_NAME, RandomAttack.of(this));
+    this.learnSkill(RandomAttack.of(this));
   }
 }

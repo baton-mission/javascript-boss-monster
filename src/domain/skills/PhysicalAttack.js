@@ -19,7 +19,10 @@ export class PhysicalAttack extends Attack {
    * @param {Unit} caster
    */
   static of(caster) {
-    return new PhysicalAttack(caster, { skillName: PhysicalAttack.SKILL_NAME, damage: 10 });
+    return new PhysicalAttack(caster, {
+      skillName: PhysicalAttack.SKILL_NAME,
+      damage: PhysicalAttack.DAMAGE,
+    });
   }
 
   /** @protected */

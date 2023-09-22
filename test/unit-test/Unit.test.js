@@ -10,7 +10,7 @@ describe('유닛 테스트', () => {
 
   beforeEach(() => {
     unit = new Unit({ name: '유닛', hp: 100, mp: 100 });
-    skill = new Skill(unit, { skillName: '스킬', requireMp: 30 });
+    skill = new Skill(unit, { requireMp: 30 });
   });
 
   it('유닛은 체력을 보유한다.', () => {
@@ -19,23 +19,23 @@ describe('유닛 테스트', () => {
 
   it('유닛은 스킬을 배울 수 있다.', () => {
     expect(unit.skills.size).toBe(0);
-    unit.learnSkill(skill.skillName, skill);
+    unit.learnSkill(skill);
     expect(unit.skills.size).toBe(1);
   });
 
   it('유닛은 스킬을 사용할 수 있다.', () => {
     const enemy = new Unit({ name: '몬스터', hp: 100 });
-    unit.learnSkill('스킬', skill);
+    unit.learnSkill(skill);
 
     const skillSpy = jest.spyOn(skill, 'use');
 
-    unit.useSkill('스킬', enemy);
+    unit.useSkill(skill.skillName, enemy);
 
     expect(skillSpy).toHaveBeenCalled();
   });
 
   it('스킬에 필요한 마나가 부족할 시 에러를 발생시킨다.', () => {
-    unit.learnSkill(skill.skillName, skill);
+    unit.learnSkill(skill);
 
     expect(() => {
       unit.useSkill(skill.skillName);
@@ -52,10 +52,10 @@ describe('유닛 테스트', () => {
   });
 
   it('동일한 스킬을 배울 시 에러를 발생시킨다.', () => {
-    unit.learnSkill(skill.skillName, skill);
+    unit.learnSkill(skill);
 
     expect(() => {
-      unit.learnSkill(skill.skillName, skill);
+      unit.learnSkill(skill);
     }).toThrow(ERROR_MESSAGE.EXISTING_SKILL);
   });
 

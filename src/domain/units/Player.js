@@ -39,7 +39,7 @@ export class Player extends Unit {
 
   /** @protected */
   _learnBasicSkills() {
-    this.learnSkill(PhysicalAttack.SKILL_NAME, PhysicalAttack.of(this));
-    this.learnSkill(MagicAttack.SKILL_NAME, MagicAttack.of(this));
+    this.learnSkill(PhysicalAttack.of(this));
+    this.learnSkill(MagicAttack.of(this));
   }
 }

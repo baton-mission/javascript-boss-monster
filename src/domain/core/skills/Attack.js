@@ -12,6 +12,8 @@ class Attack extends Skill {
   /** @protected */
   _damage;
 
+  static SKILL_NAME = '공격 스킬';
+
   /**
    * @param {Unit} caster
    * @param {{

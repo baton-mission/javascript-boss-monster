@@ -10,6 +10,8 @@ export class Skill {
   /** @protected */
   _caster;
 
+  static SKILL_NAME = '기본 스킬';
+
   #skillName;
 
   #requireMp;
@@ -20,9 +22,9 @@ export class Skill {
    * @param {string} options.skillName
    * @param {number} [options.requireMp=0]
    */
-  constructor(caster, { skillName, requireMp }) {
+  constructor(caster, { requireMp }) {
     this._caster = caster;
-    this.#skillName = skillName;
+    this.#skillName = this.constructor.SKILL_NAME;
     this.#requireMp = requireMp || 0;
   }
 

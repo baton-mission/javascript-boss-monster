@@ -188,11 +188,11 @@ export class Unit {
    * @param {string} skillName
    * @param {Skill} skill
    */
-  learnSkill(skillName, skill) {
-    if (this._skills.get(skillName)) {
+  learnSkill(skill) {
+    if (this._skills.get(skill.skillName)) {
       throw new Error(ERROR_MESSAGE.EXISTING_SKILL);
     }
-    this._skills.set(skillName, skill);
+    this._skills.set(skill.skillName, skill);
   }
 
   /**
