@@ -2,8 +2,8 @@
  * @typedef {import('../../core/units/Unit').Unit} Unit
  */
 
-import { ERROR_MESSAGE } from '../../../constants/error';
-import { Unit } from '../units/Unit';
+import { ERROR_MESSAGE } from '../../../constants/error.js';
+import { Unit } from '../units/Unit.js';
 
 /**
  * @class

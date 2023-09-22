@@ -5,8 +5,8 @@
  */
 
 import { ERROR_MESSAGE } from '../constants/error.js';
-import { Monster } from './core/units/Monster';
-import { Player } from './units/Player';
+import { Monster } from './core/units/Monster.js';
+import { Player } from './units/Player.js';
 
 export class BattleFiled {
   #turn = 1;

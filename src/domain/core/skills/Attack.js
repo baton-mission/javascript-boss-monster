@@ -1,5 +1,5 @@
 import { ERROR_MESSAGE } from '../../../constants/error.js';
-import { Unit } from '../units/Unit';
+import { Unit } from '../units/Unit.js';
 import { Skill } from './Skill.js';
 
 /**
