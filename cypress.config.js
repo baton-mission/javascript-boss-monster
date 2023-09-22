@@ -1,4 +1,4 @@
-const { defineConfig } = require('cypress')
+const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   screenshotOnRunFailure: false,
@@ -9,4 +9,4 @@ module.exports = defineConfig({
     specPattern: 'test/*.spec.js',
     supportFile: false,
   },
-})
+});
