@@ -2,6 +2,9 @@
  * @typedef {import('../../core/units/Unit').Unit} Unit
  */
 
+import { ERROR_MESSAGE } from '../../../constants/error';
+import { Unit } from '../units/Unit';
+
 /**
  * @class
  * @abstract
@@ -23,9 +26,27 @@ export class Skill {
    * @param {number} [options.requireMp=0]
    */
   constructor(caster, { requireMp }) {
+    this.#validate(caster, requireMp);
     this._caster = caster;
     this.#skillName = this.constructor.SKILL_NAME;
     this.#requireMp = requireMp || 0;
+  }
+
+  #validate(caster, requireMp) {
+    if (!(caster instanceof Unit)) {
+      throw new Error(ERROR_MESSAGE.INVALID_SKILL_CASTER);
+    }
+    if (!requireMp) return;
+    if (typeof requireMp !== 'number') {
+      throw new Error(ERROR_MESSAGE.IS_NOT_NUMBER('필요 MP'));
+    }
+  }
+
+  /**
+   * @returns {Unit}
+   */
+  get caster() {
+    return this._caster;
   }
 
   /**

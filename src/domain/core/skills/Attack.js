@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from '../../../constants/error.js';
+import { Unit } from '../units/Unit';
 import { Skill } from './Skill.js';
 
 /**
@@ -24,7 +26,18 @@ class Attack extends Skill {
    */
   constructor(caster, { skillName, damage, requireMp }) {
     super(caster, { skillName, requireMp });
+    this.#validateDamage({ damage });
     this._damage = damage;
+  }
+
+  #validateDamage({ damage }) {
+    if (typeof damage !== 'number') {
+      throw new Error(ERROR_MESSAGE.IS_NOT_NUMBER('데미지'));
+    }
+  }
+
+  get damage() {
+    return this._damage;
   }
 
   /**
@@ -35,7 +48,14 @@ class Attack extends Skill {
    * @param {import('../../core/units/Unit').UnitInstance} [enemy] - 스킬을 사용할 대상 적 유닛 인스턴스
    */
   _effect(enemy) {
+    this.#validateTarget(enemy);
     enemy.decreaseHp(this._damage);
+  }
+
+  #validateTarget(enemy) {
+    if (!(enemy instanceof Unit)) {
+      throw new Error(ERROR_MESSAGE.INVALID_SKILL_TARGET);
+    }
   }
 }
 

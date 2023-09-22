@@ -18,4 +18,7 @@ export const ERROR_MESSAGE = Object.freeze({
 
   INVALID_PLAYER: '올바른 플레이어를 설정해주세요!',
   INVALID_ENEMY: '올바른 적을 설정해주세요!',
+
+  INVALID_SKILL_CASTER: '올바르지 않은 스킬 시전자입니다!',
+  INVALID_SKILL_TARGET: '올바르지 않은 스킬 사용 대상입니다!',
 });
