@@ -40,12 +40,8 @@ export class Unit {
   constructor({ name, hp, mp }) {
     this.#validate({ name, hp, mp });
     this.#setName(name);
-    if (hp) {
-      this.#setInitialHp(hp);
-    }
-    if (mp) {
-      this.#setInitialMp(mp);
-    }
+    this.#setInitialHp(hp);
+    this.#setInitialMp(mp);
     this._learnBasicSkills();
   }
 
@@ -65,9 +61,14 @@ export class Unit {
   }
 
   /**
-   * @param {number} mp
+   * @param {number} [mp]
    */
   #setInitialMp(mp) {
+    if (!mp) {
+      this._status.mp = 0;
+      this._status.maxMp = 0;
+      return;
+    }
     this._status.mp = mp;
     this._status.maxMp = mp;
   }

@@ -119,8 +119,9 @@ describe('전장 전투 테스트', () => {
     expect(battleField.player.status.hp).toBe(120);
   });
 
-  it('스킬 시전에 실해할 시 턴이 진행되지 않는다.', () => {
-    const player = new Player({ name: '용사', hp: 180, mp: 20 });
+  it('스킬 시전에 실패할 시 턴이 진행되지 않는다.', () => {
+    const player = new Player({ name: '용사', hp: 170, mp: 30 });
+    player.decreaseMp(10);
     const battleField = new BattleFiled(player);
     const monster = new BossMonster({ name: '보스 몬스터', hp: 100 });
     battleField.setEnemy(monster);
@@ -129,7 +130,7 @@ describe('전장 전투 테스트', () => {
       battleField.processTurn(MagicAttack.SKILL_NAME, RandomAttack.SKILL_NAME);
     }).toThrow();
 
-    expect(battleField.player.status.hp).toBe(180);
+    expect(battleField.player.status.hp).toBe(170);
     expect(battleField.player.status.mp).toBe(20);
     expect(battleField.enemy.status.hp).toBe(100);
     expect(battleField.turn).toBe(1);
@@ -138,7 +139,7 @@ describe('전장 전투 테스트', () => {
       battleField.processTurn(MagicAttack.SKILL_NAME, PhysicalAttack.SKILL_NAME);
     }).toThrow();
 
-    expect(battleField.player.status.hp).toBe(180);
+    expect(battleField.player.status.hp).toBe(170);
     expect(battleField.player.status.mp).toBe(20);
     expect(battleField.enemy.status.hp).toBe(100);
     expect(battleField.turn).toBe(1);

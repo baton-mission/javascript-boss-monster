@@ -31,7 +31,7 @@ describe('공격 스킬 생성 유효성 테스트', () => {
     '데미지가 숫자가 아닐시 에러가 발생한다.',
     ({ damage }) => {
       expect(() => {
-        const caster = new Unit({ name: '유닛', hp: 100 });
+        const caster = new Unit({ name: '유닛', hp: 100, mp: 100 });
         new Attack(caster, { requireMp: 10, damage });
       }).toThrow(ERROR_MESSAGE.IS_NOT_NUMBER('데미지'));
     }

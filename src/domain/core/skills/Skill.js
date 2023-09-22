@@ -40,6 +40,9 @@ export class Skill {
     if (typeof requireMp !== 'number') {
       throw new Error(ERROR_MESSAGE.IS_NOT_NUMBER('필요 MP'));
     }
+    if (caster.status.maxMp < requireMp) {
+      throw new Error(ERROR_MESSAGE.IS_SUFFICIENT_MP);
+    }
   }
 
   /**

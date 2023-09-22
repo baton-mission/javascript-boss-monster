@@ -45,4 +45,13 @@ describe('스킬 생성 유효성 테스트', () => {
       }).toThrow(ERROR_MESSAGE.IS_NOT_NUMBER('필요 MP'));
     }
   );
+
+  it.each([
+    { caster: new Unit({ name: '유닛', hp: 10 }) },
+    { caster: new Unit({ name: '유닛', hp: 10, mp: 10 }) },
+  ])('시전자의 최대 MP가 필요 MP보다 적을시 에러가 발생한다.', ({ caster }) => {
+    expect(() => {
+      new Skill(caster, { requireMp: 11 });
+    }).toThrow(ERROR_MESSAGE.IS_SUFFICIENT_MP);
+  });
 });
