@@ -11,14 +11,23 @@ export class StatusForm extends ViewComponent {
     },
   };
 
+  /**
+   * @returns {string}
+   */
   get playerName() {
     return this._children.inputs.playerNameInput.value;
   }
 
+  /**
+   * @returns {string}
+   */
   get playerStatus() {
     return this._children.inputs.playerStatusInput.value;
   }
 
+  /**
+   * @returns {string}
+   */
   get bossHp() {
     return this._children.inputs.bossStatusInput.value;
   }

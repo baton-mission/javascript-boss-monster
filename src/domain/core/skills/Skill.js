@@ -28,10 +28,16 @@ export class Skill {
     this.#requireMp = requireMp || 0;
   }
 
+  /**
+   * @returns {string}
+   */
   get skillName() {
     return this.#skillName;
   }
 
+  /**
+   * @returns {number}
+   */
   get requireMp() {
     return this.#requireMp;
   }

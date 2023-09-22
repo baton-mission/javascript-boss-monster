@@ -17,6 +17,8 @@
     "no-new": "off",
     "comma-dangle": "off",
     "import/extensions": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "implicit-arrow-linebreak": "off",
+    "object-curly-newline": "off"
   }
 }

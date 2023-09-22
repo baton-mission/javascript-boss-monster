@@ -20,7 +20,10 @@ export class Controller {
     this.#setViewEvent();
   }
 
-  #withRetry(action) {
+  /**
+   * @param {function} action
+   */
+  #withShowError(action) {
     try {
       action();
     } catch (err) {
@@ -35,12 +38,12 @@ export class Controller {
 
   #setStatusFormEvent() {
     const { startButton } = this.#views.statusForm.inputs;
-    startButton.addEvent('click', () => this.#withRetry(() => this.#start()));
+    startButton.addEvent('click', () => this.#withShowError(() => this.#start()));
   }
 
   #setUseSkillEvent() {
     const { skillWindow } = this.#views.battleScreen.inputs;
-    skillWindow.addEvent('click', (e) => this.#withRetry(() => this.processTurn(e)));
+    skillWindow.addEvent('click', (e) => this.#withShowError(() => this.processTurn(e)));
   }
 
   /**
@@ -80,6 +83,9 @@ export class Controller {
     this.#views.battleScreen.setPlayer(this.#battleField.player.status);
   }
 
+  /**
+   * @param {string} skillName
+   */
   processTurn(skillName) {
     this.#battleField.processTurn(skillName, RandomAttack.SKILL_NAME);
     this.#views.battleScreen.setEnemy(this.#battleField.enemy.status);

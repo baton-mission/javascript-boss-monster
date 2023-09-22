@@ -24,10 +24,16 @@ export class BattleFiled {
     this.#player = player;
   }
 
+  /**
+   * @returns {number}
+   */
   get turn() {
     return this.#turn;
   }
 
+  /**
+   * @returns {Player}
+   */
   get player() {
     return this.#player;
   }
@@ -60,6 +66,9 @@ export class BattleFiled {
     this.#enemy = enemy;
   }
 
+  /**
+   * @param {number} [value]
+   */
   increaseTurn(value = 1) {
     this.#turn += value;
   }
