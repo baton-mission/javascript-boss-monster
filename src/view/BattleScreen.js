@@ -44,7 +44,7 @@ export class BattleScreen extends ViewComponent {
    * @param {number} maxHp
    */
   setPlayerHp(hp, maxHp) {
-    this._children.output.playerHp.setText(`[${hp}/${maxHp}]`);
+    this._children.output.playerHp.setText(`❤️ [${hp}/${maxHp}]`);
   }
 
   /**
@@ -52,7 +52,7 @@ export class BattleScreen extends ViewComponent {
    * @param {number} maxMp
    */
   setPlayerMp(mp, maxMp) {
-    this._children.output.playerMp.setText(`[${mp}/${maxMp}]`);
+    this._children.output.playerMp.setText(`💙 [${mp}/${maxMp}]`);
   }
 
   /**
@@ -68,7 +68,7 @@ export class BattleScreen extends ViewComponent {
    * @param {number} maxHp
    */
   setEnemyHp(hp, maxHp) {
-    this._children.output.bossHp.setText(`[${hp}/${maxHp}]`);
+    this._children.output.bossHp.setText(`❤️ [${hp}/${maxHp}]`);
   }
 
   /**
