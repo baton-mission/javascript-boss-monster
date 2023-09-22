@@ -15,4 +15,7 @@ export const ERROR_MESSAGE = Object.freeze({
   UNKNOWN_CONDITION_CODE: '존재하지 않는 상태 코드입니다!',
 
   IS_ENDED_GAME: '종료된 전투입니다! 게임을 재시작해주세요!',
+
+  INVALID_PLAYER: '올바른 플레이어를 설정해주세요!',
+  INVALID_ENEMY: '올바른 적을 설정해주세요!',
 });

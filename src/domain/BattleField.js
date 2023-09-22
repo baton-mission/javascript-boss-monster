@@ -5,6 +5,8 @@
  */
 
 import { ERROR_MESSAGE } from '../constants/error.js';
+import { Monster } from './core/units/Monster';
+import { Player } from './units/Player';
 
 export class BattleFiled {
   #turn = 1;
@@ -21,7 +23,14 @@ export class BattleFiled {
    * @param {Player} player
    */
   constructor(player) {
+    this.#validate(player);
     this.#player = player;
+  }
+
+  #validate(player) {
+    if (!(player instanceof Player)) {
+      throw new Error(ERROR_MESSAGE.INVALID_PLAYER);
+    }
   }
 
   /**
@@ -63,7 +72,14 @@ export class BattleFiled {
    * @param {Monster} enemy
    */
   setEnemy(enemy) {
+    this.#validateEnemy(enemy);
     this.#enemy = enemy;
+  }
+
+  #validateEnemy(player) {
+    if (!(player instanceof Monster)) {
+      throw new Error(ERROR_MESSAGE.INVALID_ENEMY);
+    }
   }
 
   /**

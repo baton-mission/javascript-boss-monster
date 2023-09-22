@@ -3,6 +3,8 @@ import { BossMonster } from '../../src/domain/units/monsters/BossMonster';
 import { Player } from '../../src/domain/units';
 import { PhysicalAttack, MagicAttack, RandomAttack } from '../../src/domain/skills';
 import { Random } from '../../src/utils/random';
+import { Unit } from '../../src/domain/core/units/Unit';
+import { ERROR_MESSAGE } from '../../src/constants/error';
 
 jest.spyOn(Random, 'calculateBossDMG').mockReturnValue(10);
 
@@ -37,6 +39,34 @@ describe('전장 테스트', () => {
 
     battleField.increaseTurn(3);
     expect(battleField.turn).toBe(5);
+  });
+});
+
+describe('전장 생성 예외 테스트', () => {
+  it.each([
+    { player: null },
+    { player: undefined },
+    { player: '용사' },
+    { player: new Unit({ name: '유닛', hp: 10 }) },
+    { player: new BossMonster({ name: '스파이', hp: 100 }) },
+  ])('플레이어가 아닌 값이 들어올 시 에러가 발생한다 입력받는다', ({ player }) => {
+    expect(() => {
+      new BattleFiled(player);
+    }).toThrow(ERROR_MESSAGE.INVALID_PLAYER);
+  });
+
+  it.each([
+    { player: null },
+    { player: undefined },
+    { player: '용사' },
+    { player: new Unit({ name: '유닛', hp: 10 }) },
+    { player: new Player({ name: '용사', hp: 120, mp: 80 }) },
+  ])('몬스터가 아닌 값이 들어올 시 에러가 발생한다 입력받는다', ({ enemy }) => {
+    expect(() => {
+      const player = new Player({ name: '용사', hp: 120, mp: 80 });
+      const battleField = new BattleFiled(player);
+      battleField.setEnemy(enemy);
+    }).toThrow(ERROR_MESSAGE.INVALID_ENEMY);
   });
 });
 
